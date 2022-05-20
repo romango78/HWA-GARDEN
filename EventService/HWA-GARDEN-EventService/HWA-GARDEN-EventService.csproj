@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>HWA_GARDEN_EventService</RootNamespace>
+    <AssemblyName>HWA.GARDEN.EventService</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

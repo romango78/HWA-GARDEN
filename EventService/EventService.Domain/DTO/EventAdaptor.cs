@@ -10,7 +10,7 @@ namespace HWA.GARDEN.EventService.Domain.DTO
             // TODO: ADD PARAMETERS VALIDATION
 
             Id = eventEntity.Id;
-            Group = new EventGroupAdapter(eventEntity.Group);
+            Group = eventEntity.Group != null ? new EventGroupAdapter(eventEntity.Group) : null;
             Name = eventEntity.Name;
             Description = eventEntity.Description;
             StartDate = eventEntity.StartDt.ToDate(year);

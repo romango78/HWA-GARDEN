@@ -21,8 +21,8 @@
 
         public static int ToDayOfYear(this DateTime date)
         {
-            var result = (date - new DateTime(date.Year, 1, 1)).Days;
-            if(DateTime.IsLeapYear(date.Year))
+            var result = (date - new DateTime(date.Year, 1, 1)).Days + 1;
+            if(DateTime.IsLeapYear(date.Year) && result > DayOfFeb28)
             {
                 result--;
             }
