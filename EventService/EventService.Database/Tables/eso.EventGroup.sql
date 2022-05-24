@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[EventGroup]
+﻿CREATE TABLE [eso].[EventGroup]
 (
 	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Name] NVARCHAR(250) NOT NULL,

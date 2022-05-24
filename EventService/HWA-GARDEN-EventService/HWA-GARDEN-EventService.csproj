@@ -4,12 +4,19 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>HWA_GARDEN_EventService</RootNamespace>
-    <AssemblyName>HWA.GARDEN.EventService</AssemblyName>
+    <RootNamespace>HWA.GARDEN.EventService</RootNamespace>
+    <AssemblyName>HWA-GARDEN-EventService</AssemblyName>
+    <UserSecretsId>76b885b6-93fa-41d9-a347-fb8638f6a5d4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fonlow.DateOnlyExtensions" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventService.Domain\HWA-GARDEN-EventService.Domain.csproj" />
   </ItemGroup>
 
 </Project>

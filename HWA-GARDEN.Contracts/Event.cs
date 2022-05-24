@@ -1,9 +1,11 @@
-﻿namespace HWA.GARDEN.EventService.Domain.DTO
+﻿namespace HWA.GARDEN.Contracts
 {
     [Serializable]
     public class Event
     {
         public int Id { get; set; }
+
+        public Calendar Calendar { get; set; }
 
         public EventGroup Group { get; set; }
 

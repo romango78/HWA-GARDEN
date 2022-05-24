@@ -1,4 +1,4 @@
-﻿namespace HWA.GARDEN.EventService.Domain.DTO
+﻿namespace HWA.GARDEN.Contracts
 {
     [Serializable]
     public class EventGroup

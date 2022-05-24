@@ -1,12 +1,14 @@
-﻿using HWA.GARDEN.EventService.DataAccess.Entities;
+﻿using HWA.GARDEN.Contracts;
+using HWA.GARDEN.Utilities.Validation;
+using HWA.GARDEN.EventService.Data.Entities;
 
-namespace HWA.GARDEN.EventService.Domain.DTO
+namespace HWA.GARDEN.EventService.Domain.Adaptors
 {
     public class EventGroupAdapter : EventGroup
     {
         public EventGroupAdapter(EventGroupEntity eventGroupEntity)
         {
-            // TODO: ADD PARAMETERS VALIDATION
+            Requires.NotNull(eventGroupEntity, nameof(eventGroupEntity));
 
             Id = eventGroupEntity.Id;
             Name = eventGroupEntity.Name;

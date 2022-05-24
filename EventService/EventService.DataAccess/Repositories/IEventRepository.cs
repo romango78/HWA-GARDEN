@@ -1,11 +1,11 @@
-﻿using HWA.GARDEN.EventService.DataAccess.Entities;
+﻿using HWA.GARDEN.EventService.Data.Entities;
 using System.Runtime.CompilerServices;
 
-namespace HWA.GARDEN.EventService.DataAccess.Repositories
+namespace HWA.GARDEN.EventService.Data.Repositories
 {
     public interface IEventRepository
     {
-        IAsyncEnumerable<EventEntity> GetEventsAsync(int startDt, int endDt, int calendarId, 
+        IAsyncEnumerable<EventEntity> GetEventsAsync(int startDt, int endDt, int calendarId,
             [EnumeratorCancellation] CancellationToken cancellationToken = default);
     }
 }

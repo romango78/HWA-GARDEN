@@ -1,6 +1,6 @@
-﻿using HWA.GARDEN.EventService.DataAccess.Entities;
+﻿using HWA.GARDEN.EventService.Data.Entities;
 
-namespace HWA.GARDEN.EventService.DataAccess.Repositories
+namespace HWA.GARDEN.EventService.Data.Repositories
 {
     public interface ICalendarRepository
     {

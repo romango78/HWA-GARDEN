@@ -9,13 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventService", "EventServic
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HWA-GARDEN-EventService.Database", "EventService\EventService.Database\HWA-GARDEN-EventService.Database.sqlproj", "{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.DataAccess", "EventService\EventService.DataAccess\HWA-GARDEN-EventService.DataAccess.csproj", "{1DD37B0F-B55C-4648-8C16-6963C0FB4B26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Data", "EventService\EventService.DataAccess\HWA-GARDEN-EventService.Data.csproj", "{1DD37B0F-B55C-4648-8C16-6963C0FB4B26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-EventService.Domain", "EventService\EventService.Domain\HWA-GARDEN-EventService.Domain.csproj", "{E5101CA8-6166-4BE0-94F5-84E4555DD674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Domain", "EventService\EventService.Domain\HWA-GARDEN-EventService.Domain.csproj", "{E5101CA8-6166-4BE0-94F5-84E4555DD674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-EventService", "EventService\HWA-GARDEN-EventService\HWA-GARDEN-EventService.csproj", "{48551CB6-15C6-456C-8313-595C968A6843}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService", "EventService\HWA-GARDEN-EventService\HWA-GARDEN-EventService.csproj", "{48551CB6-15C6-456C-8313-595C968A6843}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-EventService.Domain.Tests", "EventService\HWA-GARDEN-EventService.Domain.Tests\HWA-GARDEN-EventService.Domain.Tests.csproj", "{B658B5FA-C2DD-4321-BA46-CDDFBE161FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Domain.Tests", "EventService\HWA-GARDEN-EventService.Domain.Tests\HWA-GARDEN-EventService.Domain.Tests.csproj", "{B658B5FA-C2DD-4321-BA46-CDDFBE161FC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN.Utilities", "HWA-GARDEN.Utilities\HWA-GARDEN.Utilities.csproj", "{37C10BD9-36E0-4321-93F7-4527C6D3E176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN.Contracts", "HWA-GARDEN.Contracts\HWA-GARDEN.Contracts.csproj", "{694E13A0-8194-4240-AD00-6BE1F41FAFC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN.Common", "HWA-GARDEN.Data\HWA-GARDEN.Common.csproj", "{349700E3-AE6A-478B-A5CA-E56BDE01C291}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,18 @@ Global
 		{B658B5FA-C2DD-4321-BA46-CDDFBE161FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B658B5FA-C2DD-4321-BA46-CDDFBE161FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B658B5FA-C2DD-4321-BA46-CDDFBE161FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C10BD9-36E0-4321-93F7-4527C6D3E176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C10BD9-36E0-4321-93F7-4527C6D3E176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C10BD9-36E0-4321-93F7-4527C6D3E176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C10BD9-36E0-4321-93F7-4527C6D3E176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694E13A0-8194-4240-AD00-6BE1F41FAFC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{694E13A0-8194-4240-AD00-6BE1F41FAFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{694E13A0-8194-4240-AD00-6BE1F41FAFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{694E13A0-8194-4240-AD00-6BE1F41FAFC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{349700E3-AE6A-478B-A5CA-E56BDE01C291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{349700E3-AE6A-478B-A5CA-E56BDE01C291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{349700E3-AE6A-478B-A5CA-E56BDE01C291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{349700E3-AE6A-478B-A5CA-E56BDE01C291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

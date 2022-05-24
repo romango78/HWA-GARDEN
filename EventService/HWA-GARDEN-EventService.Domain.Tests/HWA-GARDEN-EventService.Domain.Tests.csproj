@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventService.DataAccess\HWA-GARDEN-EventService.DataAccess.csproj" />
+    <ProjectReference Include="..\EventService.DataAccess\HWA-GARDEN-EventService.Data.csproj" />
     <ProjectReference Include="..\EventService.Domain\HWA-GARDEN-EventService.Domain.csproj" />
   </ItemGroup>
 

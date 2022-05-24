@@ -1,0 +1,22 @@
+﻿CREATE USER [es_user]
+FROM LOGIN [es_user]
+WITH DEFAULT_SCHEMA = eso
+GO
+
+GRANT CONNECT TO [es_user]
+GO
+
+GRANT SELECT ON SCHEMA::eso TO [es_user]
+GO
+
+GRANT INSERT ON SCHEMA::eso TO [es_user]
+GO
+
+GRANT DELETE ON SCHEMA::eso TO [es_user]
+GO
+
+GRANT UPDATE ON SCHEMA::eso TO [es_user]
+GO
+
+GRANT EXECUTE ON SCHEMA::eso TO [es_user]
+GO

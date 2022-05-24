@@ -1,4 +1,4 @@
-﻿namespace HWA.GARDEN.EventService.DataAccess.Entities
+﻿namespace HWA.GARDEN.EventService.Data.Entities
 {
     public class CalendarEntity
     {

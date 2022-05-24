@@ -1,4 +1,4 @@
-﻿using HWA.GARDEN.EventService.Domain.DTO;
+﻿using HWA.GARDEN.Contracts;
 using System.Runtime.CompilerServices;
 
 namespace HWA.GARDEN.EventService.Domain

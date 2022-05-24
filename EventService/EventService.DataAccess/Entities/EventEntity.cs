@@ -1,11 +1,11 @@
-﻿namespace HWA.GARDEN.EventService.DataAccess.Entities
+﻿namespace HWA.GARDEN.EventService.Data.Entities
 {
     [Serializable]
     public class EventEntity
     {
         public int Id { get; set; }
-        
-        public EventGroupEntity Group { get; set; }
+
+        public int GroupId { get; set; }
 
         public CalendarEntity Calendar { get; set; }
 

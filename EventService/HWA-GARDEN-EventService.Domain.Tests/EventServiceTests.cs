@@ -1,8 +1,8 @@
 using FluentAssertions;
-using HWA.GARDEN.EventService.DataAccess;
-using HWA.GARDEN.EventService.DataAccess.Entities;
-using HWA.GARDEN.EventService.DataAccess.Repositories;
-using HWA.GARDEN.EventService.Domain.DTO;
+using HWA.GARDEN.Contracts;
+using HWA.GARDEN.EventService.Data;
+using HWA.GARDEN.EventService.Data.Entities;
+using HWA.GARDEN.EventService.Data.Repositories;
 using Moq;
 
 namespace HWA.GARDEN.EventService.Domain.Tests
@@ -34,11 +34,16 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                     , It.Is<int>(a => a == 1), It.IsAny<CancellationToken>()))
                 .Returns((new[]
                 {
-                    new EventEntity { StartDt = 1, EndDt = 33, Name = "Event 1" },
-                    new EventEntity { StartDt = 33, EndDt = 60, Name = "Event 2" },
-                    new EventEntity { StartDt = 33, EndDt = 40, Name = "Event 3" },
-                    new EventEntity { StartDt = 1, EndDt = 60, Name = "Event 4" }
+                    new EventEntity { StartDt = 1, EndDt = 33, Name = "Event 1", GroupId = 1 },
+                    new EventEntity { StartDt = 33, EndDt = 60, Name = "Event 2", GroupId = 1 },
+                    new EventEntity { StartDt = 33, EndDt = 40, Name = "Event 3", GroupId = 1 },
+                    new EventEntity { StartDt = 1, EndDt = 60, Name = "Event 4" , GroupId = 1 }
                 }).ToAsyncEnumerable());
+
+            var eventGroupRepo = Mock.Of<IEventGroupRepository>();
+            Mock.Get(eventGroupRepo)
+                .Setup(c => c.GetAsync(It.Is<int>(a => a == 1), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new EventGroupEntity { Id = 1, Name = "G1" }));
 
             Func<IUnitOfWork> unitOfWorkFactory = () =>
             {
@@ -49,6 +54,9 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 Mock.Get(uow)
                     .Setup(c => c.EventRepository)
                     .Returns(eventRepo);
+                Mock.Get(uow)
+                    .Setup(c => c.EventGroupRepository)
+                    .Returns(eventGroupRepo);
                 return uow;
             };
 
@@ -58,7 +66,9 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             int count = 0;
             await foreach (var item in sut.GetEventsAsync(start, end, CancellationToken.None))
             {
-                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start);
+                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
+                    && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
+                    && m.Calendar.Year == 2022);
                 count++;
             }
             count.Should().Be(4);
@@ -91,20 +101,25 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                     , It.Is<int>(a => a == 1), It.IsAny<CancellationToken>()))
                 .Returns((new[]
                 {
-                    new EventEntity { StartDt = 200, EndDt = 365, Name = "Event 5" },
-                    new EventEntity { StartDt = 283, EndDt = 360, Name = "Event 6" }
+                    new EventEntity { StartDt = 200, EndDt = 365, Name = "Event 5", GroupId = 1 },
+                    new EventEntity { StartDt = 283, EndDt = 360, Name = "Event 6", GroupId = 1 }
                 }).ToAsyncEnumerable());
             Mock.Get(eventRepo)
                 .Setup(c => c.GetEventsAsync(It.Is<int>(a => a == 1), It.Is<int>(a => a == 60)
                     , It.Is<int>(a => a == 2), It.IsAny<CancellationToken>()))
                 .Returns((new[]
                 {
-                    new EventEntity { StartDt = 1, EndDt = 33, Name = "Event 1" },
-                    new EventEntity { StartDt = 33, EndDt = 60, Name = "Event 2" },
-                    new EventEntity { StartDt = 33, EndDt = 40, Name = "Event 3" },
-                    new EventEntity { StartDt = 1, EndDt = 60, Name = "Event 4" }
+                    new EventEntity { StartDt = 1, EndDt = 33, Name = "Event 1", GroupId = 1 },
+                    new EventEntity { StartDt = 33, EndDt = 60, Name = "Event 2", GroupId = 1 },
+                    new EventEntity { StartDt = 33, EndDt = 40, Name = "Event 3", GroupId = 1 },
+                    new EventEntity { StartDt = 1, EndDt = 60, Name = "Event 4", GroupId = 1 }
                 }).ToAsyncEnumerable());
 
+
+            var eventGroupRepo = Mock.Of<IEventGroupRepository>();
+            Mock.Get(eventGroupRepo)
+                .Setup(c => c.GetAsync(It.Is<int>(a => a == 1), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new EventGroupEntity { Id = 1, Name = "G1" }));
 
             Func<IUnitOfWork> unitOfWorkFactory = () =>
             {
@@ -115,6 +130,9 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 Mock.Get(uow)
                     .Setup(c => c.EventRepository)
                     .Returns(eventRepo);
+                Mock.Get(uow)
+                    .Setup(c => c.EventGroupRepository)
+                    .Returns(eventGroupRepo);
                 return uow;
             };
 
@@ -124,7 +142,9 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             int count = 0;
             await foreach (var item in sut.GetEventsAsync(start, end, CancellationToken.None))
             {
-                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start);
+                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
+                    && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
+                    && (m.Calendar.Year == 2022 || m.Calendar.Year == 2023));
                 count++;
             }
             count.Should().Be(6);

@@ -60,9 +60,12 @@
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\dbo.Event.sql" />
-    <Build Include="Tables\dbo.Calendar.sql" />
-    <Build Include="Tables\dbo.EventGroup.sql" />
+    <Build Include="Tables\eso.Event.sql" />
+    <Build Include="Tables\eso.Calendar.sql" />
+    <Build Include="Tables\eso.EventGroup.sql" />
+    <Build Include="eso_schema.sql" />
+    <Build Include="db_login.sql" />
+    <Build Include="es_user.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="HWA-GARDEN-Events.Database.publish.xml" />
