@@ -1,11 +1,11 @@
-﻿CREATE TABLE [eso].[Event]
+﻿CREATE TABLE [dbo].[Event]
 (
 	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[EventGroupId] INT NOT NULL,
 	[Name] NVARCHAR(250) NOT NULL,
-	[Descrition] NVARCHAR(1024) NULL,
+	[Description] NVARCHAR(1024) NULL,
 	[CalendarId] INT NULL,
 	[StartDt] SMALLINT NOT NULL,
 	[EndDt] SMALLINT NOT NULL,
-	CONSTRAINT FK_Event_EventGroup FOREIGN KEY (EventGroupId) REFERENCES [eso].[EventGroup](Id)
+	CONSTRAINT FK_Event_EventGroup FOREIGN KEY (EventGroupId) REFERENCES [dbo].[EventGroup](Id)
 )

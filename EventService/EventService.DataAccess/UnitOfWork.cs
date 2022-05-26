@@ -1,13 +1,13 @@
 ﻿using HWA.GARDEN.Common.Data;
 using HWA.GARDEN.EventService.Data.Repositories;
-using System.Data;
+using System.Data.Common;
 
 namespace HWA.GARDEN.EventService.Data
 {
     public class UnitOfWork : BaseUnitOfWork, IUnitOfWork
     {
-        public UnitOfWork(IConnectionFactory connectionFactory, Func<IDbTransaction, ICalendarRepository> calendarRepoFactory,
-            Func<IDbTransaction, IEventRepository> eventRepoFactory, Func<IDbTransaction, IEventGroupRepository> eventGroupRepoFactory)
+        public UnitOfWork(IConnectionFactory connectionFactory, Func<DbTransaction, ICalendarRepository> calendarRepoFactory,
+            Func<DbTransaction, IEventRepository> eventRepoFactory, Func<DbTransaction, IEventGroupRepository> eventGroupRepoFactory)
             :base(connectionFactory)
         {
             CalendarRepository = calendarRepoFactory(Transaction);

@@ -10,21 +10,21 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-IF NOT EXISTS(SELECT 1 FROM sys.database_principals WHERE name = 'es_user')
+IF NOT EXISTS(SELECT 1 FROM sys.database_principals WHERE name = 'app_user')
 BEGIN
-    CREATE USER [es_user]
-    FROM LOGIN [HwaGardenApp]
-    WITH DEFAULT_SCHEMA = eso;
+    CREATE USER [app_user]
+	FOR LOGIN [HwaGardenApp]
+	WITH DEFAULT_SCHEMA = dbo;
 
-    GRANT CONNECT TO [es_user];
+    EXEC sp_addrolemember N'db_datawriter', N'app_user';
 
-    GRANT SELECT ON SCHEMA::eso TO [es_user];
+    GRANT SELECT ON SCHEMA::eso TO [app_user];
 
-    GRANT INSERT ON SCHEMA::eso TO [es_user];
+    GRANT INSERT ON SCHEMA::eso TO [app_user];
 
-    GRANT DELETE ON SCHEMA::eso TO [es_user];
+    GRANT DELETE ON SCHEMA::eso TO [app_user];
 
-    GRANT UPDATE ON SCHEMA::eso TO [es_user];
+    GRANT UPDATE ON SCHEMA::eso TO [app_user];
 
-    GRANT EXECUTE ON SCHEMA::eso TO [es_user];
+    GRANT EXECUTE ON SCHEMA::eso TO [app_user];
 END

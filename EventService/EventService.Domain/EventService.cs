@@ -2,7 +2,7 @@
 using HWA.GARDEN.EventService.Data;
 using HWA.GARDEN.EventService.Data.Entities;
 using HWA.GARDEN.EventService.Domain.Adaptors;
-using HWA.GARDEN.EventService.Domain.Extensions;
+using HWA.GARDEN.Utilities.Extensions;
 using System.Runtime.CompilerServices;
 
 namespace HWA.GARDEN.EventService.Domain
@@ -52,16 +52,19 @@ namespace HWA.GARDEN.EventService.Domain
             using(IUnitOfWork uow = _unitOfWorkFactory())
             {
                 CalendarEntity calendar = await uow.CalendarRepository
-                    .GetCalendarAsync(startDate.Year, cancellationToken)
-                    .ConfigureAwait(false);
+                    .GetAsync(startDate.Year, cancellationToken)
+                    .ConfigureAwait(false) ?? new CalendarEntity { Year = startDate.Year };
+
+                IEnumerable<EventGroupEntity> eventGroupList =
+                    await uow.EventGroupRepository
+                        .GetAsync(startDate.ToDayOfYear(), endDate.ToDayOfYear(), calendar.Id, cancellationToken)
+                        .ConfigureAwait(false);
 
                 await foreach (EventEntity item in
-                    uow.EventRepository.GetEventsAsync(startDate.ToDayOfYear(), endDate.ToDayOfYear(), calendar.Id)
+                    uow.EventRepository.GetAsync(startDate.ToDayOfYear(), endDate.ToDayOfYear(), calendar.Id)
                     .WithCancellation(cancellationToken).ConfigureAwait(false))
                 {
-                    EventGroupEntity eventGroup = await uow.EventGroupRepository
-                        .GetAsync(item.GroupId, cancellationToken)
-                        .ConfigureAwait(false);
+                    EventGroupEntity eventGroup = eventGroupList.FirstOrDefault(w => w.Id == item.EventGroupId);
                     yield return new EventAdaptor(item, eventGroup, calendar);
                 }
             }

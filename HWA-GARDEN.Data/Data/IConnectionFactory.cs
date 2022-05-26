@@ -1,11 +1,11 @@
-﻿using System.Data;
+﻿using System.Data.Common;
 
 namespace HWA.GARDEN.Common.Data
 {
     public interface IConnectionFactory
     {
-        public IDbConnection GetConnection();
+        public DbConnection GetConnection();
 
-        public IDbTransaction GetTransaction();
+        public DbTransaction GetTransaction();
     }
 }

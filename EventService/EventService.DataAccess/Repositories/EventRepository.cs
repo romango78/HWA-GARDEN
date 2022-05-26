@@ -1,20 +1,34 @@
-﻿using HWA.GARDEN.Common.Data;
+﻿using Dapper;
+using HWA.GARDEN.Common.Data;
 using HWA.GARDEN.EventService.Data.Entities;
-using System.Data;
+using HWA.GARDEN.Utilities.Data;
+using System.Data.Common;
 using System.Runtime.CompilerServices;
 
 namespace HWA.GARDEN.EventService.Data.Repositories
 {
     public class EventRepository : BaseRepository, IEventRepository
     {
-        public EventRepository(IDbTransaction transaction)
+        public EventRepository(DbTransaction transaction)
             : base(transaction)
         { }
 
-        public IAsyncEnumerable<EventEntity> GetEventsAsync(int startDt, int endDt, int calendarId,
+        public async IAsyncEnumerable<EventEntity> GetAsync(int startDt, int endDt, int calendarId,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            // TODO: Replace hardcoded SQL on LINQ expression
+            var sql = $"SELECT * FROM [dbo].[Event] WHERE [StartDt] <= {endDt} AND [EndDt] >= {startDt} AND (CalendarID IS NULL OR CalendarID = {calendarId})";
+
+            var command = new CommandDefinition(sql, transaction: Transaction, cancellationToken: cancellationToken);
+            using (var reader = await Connection.ExecuteReaderAsync(command).ConfigureAwait(false))
+            {
+                await foreach (var item in reader.GetReader<EventEntity>()
+                    .WithCancellation(cancellationToken)
+                    .ConfigureAwait(false))
+                {
+                    yield return item;
+                }
+            }
         }
     }
 }

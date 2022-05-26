@@ -1,4 +1,4 @@
-﻿using HWA.GARDEN.EventService.Domain.Extensions;
+﻿using HWA.GARDEN.Utilities.Extensions;
 using HWA.GARDEN.Contracts;
 using HWA.GARDEN.Utilities.Validation;
 using HWA.GARDEN.EventService.Data.Entities;

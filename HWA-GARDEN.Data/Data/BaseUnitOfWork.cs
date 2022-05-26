@@ -1,5 +1,5 @@
 ﻿using HWA.GARDEN.Utilities.Validation;
-using System.Data;
+using System.Data.Common;
 
 namespace HWA.GARDEN.Common.Data
 {
@@ -7,8 +7,8 @@ namespace HWA.GARDEN.Common.Data
     {
         private bool _disposed = false;
 
-        protected IDbConnection Connection;
-        protected IDbTransaction Transaction;
+        protected DbConnection Connection;
+        protected DbTransaction Transaction;
 
         public BaseUnitOfWork(IConnectionFactory connectionFactory)
         {

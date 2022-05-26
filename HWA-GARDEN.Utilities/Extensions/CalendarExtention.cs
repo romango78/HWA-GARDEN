@@ -1,12 +1,12 @@
-﻿namespace HWA.GARDEN.EventService.Domain.Extensions
+﻿namespace HWA.GARDEN.Utilities.Extensions
 {
-    internal static class CalendarExtention
+    public static class CalendarExtention
     {
         private const int DayOfFeb28 = 59;
 
         public static DateOnly ToDate(this int dayOfYear, int year)
         {
-            var result = new DateOnly(year, 1, 1).AddDays(dayOfYear);
+            var result = new DateOnly(year, 1, 1).AddDays(dayOfYear - 1);
             if(DateTime.IsLeapYear(year) && dayOfYear > DayOfFeb28)
             {
                 result = result.AddDays(1);

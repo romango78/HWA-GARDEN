@@ -1,22 +1,23 @@
-﻿using HWA.GARDEN.Common.Data;
+﻿using Dapper;
+using HWA.GARDEN.Common.Data;
 using HWA.GARDEN.EventService.Data.Entities;
-using System.Data;
+using System.Data.Common;
 
 namespace HWA.GARDEN.EventService.Data.Repositories
 {
     public class CalendarRepository : BaseRepository, ICalendarRepository
     {
-        public CalendarRepository(IDbTransaction transaction)
+        public CalendarRepository(DbTransaction transaction)
             :base(transaction)
         { }
 
-        public async Task<CalendarEntity> GetCalendarAsync(int year, CancellationToken cancellationToken)
+        public Task<CalendarEntity> GetAsync(int year, CancellationToken cancellationToken)
         {
-            /*var result = (from c in await Connection.QueryAsync<CalendarEntity>().ConfigureAwait(false)
-                          where c.Year == year
-                          select c).FirstOrDefault();*/
+            // TODO: Replace hardcoded SQL on LINQ expression
+            var sql = $"SELECT * FROM [dbo].[Calendar] WHERE [Year] = {year}";
 
-            throw new NotImplementedException();
+            var command = new CommandDefinition(sql, transaction: Transaction, cancellationToken: cancellationToken);
+            return Connection.QueryFirstOrDefaultAsync<CalendarEntity>(command);
         }
     }
 }

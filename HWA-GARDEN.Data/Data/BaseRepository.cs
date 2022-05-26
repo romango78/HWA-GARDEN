@@ -1,18 +1,18 @@
 ﻿using HWA.GARDEN.Utilities.Validation;
-using System.Data;
+using System.Data.Common;
 
 namespace HWA.GARDEN.Common.Data
 {
     public abstract class BaseRepository
     {
-        public BaseRepository(IDbTransaction transaction)
+        public BaseRepository(DbTransaction transaction)
         {
             Requires.NotNull(transaction, nameof(transaction));
             Transaction = transaction;
         }
 
-        protected IDbTransaction Transaction { get; }
+        protected DbTransaction Transaction { get; }
 
-        protected IDbConnection Connection => Transaction?.Connection;
+        protected DbConnection Connection => Transaction?.Connection;
     }
 }

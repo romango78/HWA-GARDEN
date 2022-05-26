@@ -4,6 +4,6 @@ namespace HWA.GARDEN.EventService.Data.Repositories
 {
     public interface ICalendarRepository
     {
-        Task<CalendarEntity> GetCalendarAsync(int year, CancellationToken cancellationToken);
+        Task<CalendarEntity> GetAsync(int year, CancellationToken cancellationToken);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using HWA.GARDEN.Common.Data;
 using HWA.GARDEN.EventService.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data;
+using System.Data.Common;
 
 namespace HWA.GARDEN.EventService.Data.Dependencies
 {
@@ -9,15 +9,15 @@ namespace HWA.GARDEN.EventService.Data.Dependencies
     {
         public static void Init(IServiceCollection builder)
         {
-            builder.AddScoped<Func<IDbTransaction, ICalendarRepository>>(sp => (t) => 
+            builder.AddScoped<Func<DbTransaction, ICalendarRepository>>(sp => (t) => 
             { 
                 return new CalendarRepository(t);
             });
-            builder.AddScoped<Func<IDbTransaction, IEventRepository>>(sp => (t) =>
+            builder.AddScoped<Func<DbTransaction, IEventRepository>>(sp => (t) =>
             {
                 return new EventRepository(t);
             });
-            builder.AddScoped<Func<IDbTransaction, IEventGroupRepository>>(sp => (t) =>
+            builder.AddScoped<Func<DbTransaction, IEventGroupRepository>>(sp => (t) =>
             {
                 return new EventGroupRepository(t);
             });
