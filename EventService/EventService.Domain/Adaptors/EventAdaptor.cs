@@ -7,13 +7,13 @@ namespace HWA.GARDEN.EventService.Domain.Adaptors
 {
     internal class EventAdaptor : Event
     {
-        public EventAdaptor(EventEntity eventEntity, EventGroupEntity eventGroupEntity, CalendarEntity calendarEntity)
+        public EventAdaptor(EventEntity eventEntity, EventGroupEntity eventGroupEntity, Calendar calendar)
         {
             Requires.NotNull(eventEntity, nameof(eventEntity));
-            Requires.NotNull(calendarEntity, nameof(calendarEntity));
+            Requires.NotNull(calendar, nameof(calendar));
 
             Id = eventEntity.Id;
-            Calendar = new CalendarAdaptor(calendarEntity);
+            Calendar = calendar;
             Group = eventGroupEntity != null ? new EventGroupAdapter(eventGroupEntity) : null;
             Name = eventEntity.Name;
             Description = eventEntity.Description;

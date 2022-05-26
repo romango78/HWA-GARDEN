@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>HWA.GARDEN.EventService.Data</RootNamespace>
+    <RootNamespace>HWA.GARDEN.CalendarService.Data</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -15,10 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\HWA-GARDEN.Data.Utilities\HWA-GARDEN.Data.Utilities.csproj" />
     <ProjectReference Include="..\..\HWA-GARDEN.Data\HWA-GARDEN.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace HWA.GARDEN.Utilities.Data
+namespace HWA.GARDEN.Data.Utilities
 {
     public static class DataExtensions
     {

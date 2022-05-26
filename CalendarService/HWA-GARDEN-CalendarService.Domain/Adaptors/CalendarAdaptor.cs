@@ -1,8 +1,8 @@
-﻿using HWA.GARDEN.Contracts;
-using HWA.GARDEN.EventService.Data.Entities;
+﻿using HWA.GARDEN.CalendarService.Data.Entities;
+using HWA.GARDEN.Contracts;
 using HWA.GARDEN.Utilities.Validation;
 
-namespace HWA.GARDEN.EventService.Domain.Adaptors
+namespace HWA.GARDEN.CalendarService.Domain.Adaptors
 {
     public class CalendarAdaptor : Calendar
     {
@@ -10,7 +10,9 @@ namespace HWA.GARDEN.EventService.Domain.Adaptors
         {
             Requires.NotNull(calendarEntity, nameof(calendarEntity));
 
+            Id = calendarEntity.Id;
             Name = calendarEntity.Name;
+            Description = calendarEntity.Description;
             Year = calendarEntity.Year;
         }
     }

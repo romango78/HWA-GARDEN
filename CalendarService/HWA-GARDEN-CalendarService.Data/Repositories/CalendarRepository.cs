@@ -1,28 +1,28 @@
 ﻿using Dapper;
 using HWA.GARDEN.Common.Data;
-using HWA.GARDEN.EventService.Data.Entities;
-using HWA.GARDEN.Data.Utilities;
+using HWA.GARDEN.CalendarService.Data.Entities;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
+using HWA.GARDEN.Data.Utilities;
 
-namespace HWA.GARDEN.EventService.Data.Repositories
+namespace HWA.GARDEN.CalendarService.Data.Repositories
 {
-    public class EventRepository : BaseRepository, IEventRepository
+    public class CalendarRepository : BaseRepository, ICalendarRepository
     {
-        public EventRepository(DbTransaction transaction)
-            : base(transaction)
+        public CalendarRepository(DbTransaction transaction)
+            :base(transaction)
         { }
 
-        public async IAsyncEnumerable<EventEntity> GetAsync(int startDt, int endDt, int calendarId,
+        public async IAsyncEnumerable<CalendarEntity> GetListAsync(int year, 
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             // TODO: Replace hardcoded SQL on LINQ expression
-            var sql = $"SELECT * FROM [dbo].[Event] WHERE [StartDt] <= {endDt} AND [EndDt] >= {startDt} AND (CalendarID IS NULL OR CalendarID = {calendarId})";
+            var sql = $"SELECT * FROM [cso].[Calendar] WHERE [Year] = {year}";
 
             var command = new CommandDefinition(sql, transaction: Transaction, cancellationToken: cancellationToken);
             using (var reader = await Connection.ExecuteReaderAsync(command).ConfigureAwait(false))
             {
-                await foreach (var item in reader.GetReader<EventEntity>()
+                await foreach (var item in reader.GetReader<CalendarEntity>()
                     .WithCancellation(cancellationToken)
                     .ConfigureAwait(false))
                 {

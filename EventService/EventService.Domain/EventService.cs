@@ -2,19 +2,25 @@
 using HWA.GARDEN.EventService.Data;
 using HWA.GARDEN.EventService.Data.Entities;
 using HWA.GARDEN.EventService.Domain.Adaptors;
+using HWA.GARDEN.EventService.Domain.Requests;
 using HWA.GARDEN.Utilities.Extensions;
+using HWA.GARDEN.Utilities.Validation;
+using MediatR;
 using System.Runtime.CompilerServices;
 
 namespace HWA.GARDEN.EventService.Domain
 {
     public class EventService : IEventService
     {
+        private readonly IMediator _mediator;
         private readonly Func<IUnitOfWork> _unitOfWorkFactory;
 
-        public EventService(Func<IUnitOfWork> unitOfWorkFactory)
+        public EventService(IMediator mediator, Func<IUnitOfWork> unitOfWorkFactory)
         {
-            // TODO: ADD PARAMETERS VALIDATION
+            Requires.NotNull(mediator, nameof(mediator));
+            Requires.NotNull(unitOfWorkFactory, nameof(unitOfWorkFactory));
 
+            _mediator = mediator;
             _unitOfWorkFactory = unitOfWorkFactory;
         }
 
@@ -51,9 +57,9 @@ namespace HWA.GARDEN.EventService.Domain
             
             using(IUnitOfWork uow = _unitOfWorkFactory())
             {
-                CalendarEntity calendar = await uow.CalendarRepository
-                    .GetAsync(startDate.Year, cancellationToken)
-                    .ConfigureAwait(false) ?? new CalendarEntity { Year = startDate.Year };
+
+                Calendar calendar = 
+                    await _mediator.Send(new CalendarListQuery { Year = startDate.Year }, cancellationToken);
 
                 IEnumerable<EventGroupEntity> eventGroupList =
                     await uow.EventGroupRepository

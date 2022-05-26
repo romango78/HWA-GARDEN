@@ -18,12 +18,12 @@ BEGIN
     EXEC sp_addrolemember N'db_datawriter', N'app_user';
 END
 
-GRANT SELECT ON SCHEMA::eso TO [app_user];
+GRANT SELECT ON SCHEMA::cso TO [app_user];
 
-GRANT INSERT ON SCHEMA::eso TO [app_user];
+GRANT INSERT ON SCHEMA::cso TO [app_user];
 
-GRANT DELETE ON SCHEMA::eso TO [app_user];
+GRANT DELETE ON SCHEMA::cso TO [app_user];
 
-GRANT UPDATE ON SCHEMA::eso TO [app_user];
+GRANT UPDATE ON SCHEMA::cso TO [app_user];
 
-GRANT EXECUTE ON SCHEMA::eso TO [app_user];
+GRANT EXECUTE ON SCHEMA::cso TO [app_user];

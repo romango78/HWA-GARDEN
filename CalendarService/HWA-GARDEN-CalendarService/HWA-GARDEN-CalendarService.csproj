@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>HWA.GARDEN.CalendarService</RootNamespace>
+    <UserSecretsId>54e05cef-6e16-4301-8d97-6c90407156c0</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\HWA-GARDEN.Contracts\HWA-GARDEN.Contracts.csproj" />
+    <ProjectReference Include="..\..\HWA-GARDEN.Utilities\HWA-GARDEN.Utilities.csproj" />
+    <ProjectReference Include="..\HWA-GARDEN-CalendarService.Domain\HWA-GARDEN-CalendarService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
