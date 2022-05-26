@@ -1,4 +1,4 @@
-﻿using HWA.GARDEN.Common.Data;
+﻿using HWA.GARDEN.Data;
 using HWA.GARDEN.EventService.Data.Repositories;
 using HWA.GARDEN.Utilities.Validation;
 using System.Data.Common;

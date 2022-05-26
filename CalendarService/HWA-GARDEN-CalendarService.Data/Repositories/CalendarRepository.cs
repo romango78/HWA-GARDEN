@@ -1,9 +1,9 @@
 ﻿using Dapper;
-using HWA.GARDEN.Common.Data;
 using HWA.GARDEN.CalendarService.Data.Entities;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
 using HWA.GARDEN.Data.Utilities;
+using HWA.GARDEN.Data;
 
 namespace HWA.GARDEN.CalendarService.Data.Repositories
 {

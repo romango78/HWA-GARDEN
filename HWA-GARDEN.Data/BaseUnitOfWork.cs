@@ -1,7 +1,7 @@
 ﻿using HWA.GARDEN.Utilities.Validation;
 using System.Data.Common;
 
-namespace HWA.GARDEN.Common.Data
+namespace HWA.GARDEN.Data
 {
     public class BaseUnitOfWork : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿using HWA.GARDEN.Common.Security;
+﻿using HWA.GARDEN.Security;
 using MediatR;
 
 namespace HWA.GARDEN.CalendarService.Dependencies

@@ -1,7 +1,7 @@
-﻿using HWA.GARDEN.Common.Data;
-using HWA.GARDEN.CalendarService.Data.Repositories;
+﻿using HWA.GARDEN.CalendarService.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data.Common;
+using HWA.GARDEN.Data;
 
 namespace HWA.GARDEN.CalendarService.Data.Dependencies
 {

@@ -1,8 +1,8 @@
-﻿using HWA.GARDEN.Common.Security;
+﻿using HWA.GARDEN.Security;
 using HWA.GARDEN.Utilities.Validation;
 using System.Data.Common;
 
-namespace HWA.GARDEN.Common.Data
+namespace HWA.GARDEN.Data
 {
     public abstract class BaseConnectionFactory : IConnectionFactory
     {

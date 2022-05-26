@@ -1,4 +1,4 @@
-﻿namespace HWA.GARDEN.Common.Security
+﻿namespace HWA.GARDEN.Security
 {
     public interface ISecurityContext
     {

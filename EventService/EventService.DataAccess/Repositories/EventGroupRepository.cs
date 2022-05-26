@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using HWA.GARDEN.Common.Data;
+using HWA.GARDEN.Data;
 using HWA.GARDEN.EventService.Data.Entities;
 using System.Data.Common;
 

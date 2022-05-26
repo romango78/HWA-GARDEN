@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace HWA.GARDEN.Common.Data
+namespace HWA.GARDEN.Data
 {
     public interface IConnectionFactory
     {

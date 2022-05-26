@@ -1,5 +1,5 @@
 ﻿using Fonlow.DateOnlyExtensions;
-using HWA.GARDEN.Common.Security;
+using HWA.GARDEN.Security;
 
 namespace HWA.GARDEN.EventService.Dependencies
 {

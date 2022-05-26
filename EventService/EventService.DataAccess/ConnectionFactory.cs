@@ -1,5 +1,5 @@
-﻿using HWA.GARDEN.Common.Data;
-using HWA.GARDEN.Common.Security;
+﻿using HWA.GARDEN.Security;
+using HWA.GARDEN.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 

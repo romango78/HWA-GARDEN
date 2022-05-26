@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\HWA-GARDEN.Data.Utilities\HWA-GARDEN.Data.Utilities.csproj" />
-    <ProjectReference Include="..\..\HWA-GARDEN.Data\HWA-GARDEN.Common.csproj" />
+    <ProjectReference Include="..\..\HWA-GARDEN.Data\HWA-GARDEN.Data.csproj" />
   </ItemGroup>
 
 </Project>
