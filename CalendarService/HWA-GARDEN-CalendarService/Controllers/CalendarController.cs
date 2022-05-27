@@ -22,9 +22,9 @@ namespace HWA.GARDEN.CalendarService.Controllers
         // GET api/v1/[controller]/items[?year=...]
         [HttpGet]
         [Route("items")]
-        public IAsyncEnumerable<Calendar> GetCalendarListAsync([FromQuery] int year, CancellationToken token)
+        public IAsyncEnumerable<Calendar> GetCalendarListAsync([FromQuery] int year, CancellationToken cancellationToken)
         {
-            return _mediator.CreateStream(new CalendarListQuery { Year = year }, token);
+            return _mediator.CreateStream(new CalendarListQuery { Year = year }, cancellationToken);
         }
     }
 }

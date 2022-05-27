@@ -2,7 +2,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 HWA.GARDEN.CalendarService.Dependencies.DependencyContainer.Init(builder.Services,
-    builder.Configuration["DefaultConnectionString"]);
+    builder.Configuration["DefaultConnectionString"],
+    builder.Configuration["AzureServiceBusConnectionString"]);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

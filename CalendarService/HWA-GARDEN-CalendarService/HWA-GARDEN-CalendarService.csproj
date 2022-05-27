@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HWA-GARDEN.AzureServiceBus\HWA-GARDEN.AzureServiceBus.csproj" />
     <ProjectReference Include="..\..\HWA-GARDEN.Contracts\HWA-GARDEN.Contracts.csproj" />
     <ProjectReference Include="..\..\HWA-GARDEN.Utilities\HWA-GARDEN.Utilities.csproj" />
     <ProjectReference Include="..\HWA-GARDEN-CalendarService.Domain\HWA-GARDEN-CalendarService.Domain.csproj" />
