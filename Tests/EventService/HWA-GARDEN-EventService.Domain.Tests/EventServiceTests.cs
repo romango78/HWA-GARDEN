@@ -3,6 +3,8 @@ using HWA.GARDEN.Contracts;
 using HWA.GARDEN.EventService.Data;
 using HWA.GARDEN.EventService.Data.Entities;
 using HWA.GARDEN.EventService.Data.Repositories;
+using HWA.GARDEN.EventService.Domain.Requests;
+using MediatR;
 using Moq;
 
 namespace HWA.GARDEN.EventService.Domain.Tests
@@ -17,13 +19,10 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             DateOnly start = new DateOnly(2022, 2, 1);
             DateOnly end = new DateOnly(2022, 3, 1);
 
-            var calendarRepo = Mock.Of<ICalendarRepository>();
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity()));
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.Is<int>(a => a == 2022), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity { Id = 1, Name = "2022", Year = 2022 }));
+            var mediator = Mock.Of<IMediator>();
+            Mock.Get(mediator)
+                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == start.Year), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new Calendar { Id = 1, Name = "2022", Year = 2022 }));
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -49,9 +48,6 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             {
                 var uow = Mock.Of<IUnitOfWork>();
                 Mock.Get(uow)
-                    .Setup(c => c.CalendarRepository)
-                    .Returns(calendarRepo);
-                Mock.Get(uow)
                     .Setup(c => c.EventRepository)
                     .Returns(eventRepo);
                 Mock.Get(uow)
@@ -60,7 +56,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return uow;
             };
 
-            var sut = new EventService(unitOfWorkFactory);
+            var sut = new EventService(mediator, unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
@@ -81,16 +77,13 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             DateOnly start = new DateOnly(2022, 10, 1);
             DateOnly end = new DateOnly(2023, 3, 1);
 
-            var calendarRepo = Mock.Of<ICalendarRepository>();
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity()));
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.Is<int>(a => a == 2022), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity { Id = 1, Name = "2022", Year = 2022 }));
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.Is<int>(a => a == 2023), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity { Id = 2, Name = "2023", Year = 2023 }));
+            var mediator = Mock.Of<IMediator>();
+            Mock.Get(mediator)
+                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == start.Year), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new Calendar { Id = 1, Name = "2022", Year = 2022 }));
+            Mock.Get(mediator)
+                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == end.Year), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new Calendar { Id = 2, Name = "2023", Year = 2023 }));
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -125,9 +118,6 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             {
                 var uow = Mock.Of<IUnitOfWork>();
                 Mock.Get(uow)
-                    .Setup(c => c.CalendarRepository)
-                    .Returns(calendarRepo);
-                Mock.Get(uow)
                     .Setup(c => c.EventRepository)
                     .Returns(eventRepo);
                 Mock.Get(uow)
@@ -136,7 +126,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return uow;
             };
 
-            var sut = new EventService(unitOfWorkFactory);
+            var sut = new EventService(mediator, unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
@@ -149,7 +139,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             }
             count.Should().Be(6);
         }
-
+        
         [Fact]
         public async Task Should_GetEventsForWholeYear()
         {
@@ -157,16 +147,13 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             DateOnly start = new DateOnly(2022, 1, 1);
             DateOnly end = new DateOnly(2022, 12, 31);
 
-            var calendarRepo = Mock.Of<ICalendarRepository>();
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity()));
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.Is<int>(a => a == 2022), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity { Id = 1, Name = "2022", Year = 2022 }));
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.Is<int>(a => a == 2023), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity { Id = 2, Name = "2023", Year = 2023 }));
+            var mediator = Mock.Of<IMediator>();
+            Mock.Get(mediator)
+                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == 2022), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new Calendar { Id = 1, Name = "2022", Year = 2022 }));
+            Mock.Get(mediator)
+                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == 2023), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new Calendar { Id = 2, Name = "2023", Year = 2023 }));
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -200,9 +187,6 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             {
                 var uow = Mock.Of<IUnitOfWork>();
                 Mock.Get(uow)
-                    .Setup(c => c.CalendarRepository)
-                    .Returns(calendarRepo);
-                Mock.Get(uow)
                     .Setup(c => c.EventRepository)
                     .Returns(eventRepo);
                 Mock.Get(uow)
@@ -211,7 +195,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return uow;
             };
 
-            var sut = new EventService(unitOfWorkFactory);
+            var sut = new EventService(mediator, unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
@@ -224,7 +208,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             }
             count.Should().Be(6);
         }
-
+        
         [Fact]
         public async Task Should_ThrowException_WhenEndDateLessStartDate()
         {
@@ -232,29 +216,13 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             DateOnly start = new DateOnly(2023, 10, 1);
             DateOnly end = new DateOnly(2022, 3, 1);
 
-            var calendarRepo = Mock.Of<ICalendarRepository>();
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity()));
-
-            var eventRepo = Mock.Of<IEventRepository>();
-            Mock.Get(eventRepo)
-                .Setup(c => c.GetAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .Returns((new EventEntity[0]).ToAsyncEnumerable());
-
+            var mediator = Mock.Of<IMediator>();
             Func<IUnitOfWork> unitOfWorkFactory = () =>
             {
-                var uow = Mock.Of<IUnitOfWork>();
-                Mock.Get(uow)
-                    .Setup(c => c.CalendarRepository)
-                    .Returns(calendarRepo);
-                Mock.Get(uow)
-                    .Setup(c => c.EventRepository)
-                    .Returns(eventRepo);
-                return uow;
+                return Mock.Of<IUnitOfWork>();
             };
 
-            var sut = new EventService(unitOfWorkFactory);
+            var sut = new EventService(mediator, unitOfWorkFactory);
 
             // Act 
             Func<Task> func = async () => await sut.GetEventsAsync(start, end, CancellationToken.None).FirstAsync();
@@ -262,7 +230,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             // Asserts
             await func.Should().ThrowAsync<InvalidOperationException>();
         }
-
+        
         [Fact]
         public async Task Should_OperationCancelled_ByRequest()
         {
@@ -270,10 +238,10 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             DateOnly start = new DateOnly(2022, 2, 1);
             DateOnly end = new DateOnly(2022, 3, 1);
 
-            var calendarRepo = Mock.Of<ICalendarRepository>();
-            Mock.Get(calendarRepo)
-                .Setup(c => c.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new CalendarEntity()));
+            var mediator = Mock.Of<IMediator>();
+            Mock.Get(mediator)
+                .Setup(c => c.Send(It.IsAny<CalendarListQuery>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new Calendar()));
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -289,9 +257,6 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             {
                 var uow = Mock.Of<IUnitOfWork>();
                 Mock.Get(uow)
-                    .Setup(c => c.CalendarRepository)
-                    .Returns(calendarRepo);
-                Mock.Get(uow)
                     .Setup(c => c.EventRepository)
                     .Returns(eventRepo);
                 Mock.Get(uow)
@@ -303,7 +268,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             var source = new CancellationTokenSource();
             var cancellationToken = source.Token;
 
-            var sut = new EventService(unitOfWorkFactory);
+            var sut = new EventService(mediator, unitOfWorkFactory);
 
             // Act 
             Func<Task> func = async () => await sut.GetEventsAsync(start, end, cancellationToken)
@@ -314,6 +279,6 @@ namespace HWA.GARDEN.EventService.Domain.Tests
 
             // Asserts
             await func.Should().ThrowAsync<OperationCanceledException>();
-        }
+        }        
     }
 }
