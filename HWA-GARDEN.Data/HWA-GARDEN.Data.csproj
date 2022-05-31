@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HWA-GARDEN.Utilities\HWA-GARDEN.Utilities.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <ProjectReference Include="..\HWA-GARDEN.Utilities\HWA-GARDEN.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

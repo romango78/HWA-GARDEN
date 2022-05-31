@@ -33,21 +33,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CalendarService", "Calendar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-CalendarService", "CalendarService\HWA-GARDEN-CalendarService\HWA-GARDEN-CalendarService.csproj", "{0A9176D4-5CD6-4BC0-B73F-B03F04F0F437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-CalendarService.Domain", "CalendarService\HWA-GARDEN-CalendarService.Domain\HWA-GARDEN-CalendarService.Domain.csproj", "{123A0F4C-400E-4CD8-A770-F1DD71F84C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-CalendarService.Domain", "CalendarService\HWA-GARDEN-CalendarService.Domain\HWA-GARDEN-CalendarService.Domain.csproj", "{123A0F4C-400E-4CD8-A770-F1DD71F84C75}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HWA-GARDEN-CalendarService.Database", "CalendarService\HWA-GARDEN-CalendarService.Database\HWA-GARDEN-CalendarService.Database.sqlproj", "{F99DE090-8FBF-4608-A879-96C7281B5541}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-CalendarService.Data", "CalendarService\HWA-GARDEN-CalendarService.Data\HWA-GARDEN-CalendarService.Data.csproj", "{9FAA020D-686D-451A-9062-CC29D38C9606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-CalendarService.Data", "CalendarService\HWA-GARDEN-CalendarService.Data\HWA-GARDEN-CalendarService.Data.csproj", "{9FAA020D-686D-451A-9062-CC29D38C9606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN.Data.Utilities", "HWA-GARDEN.Data.Utilities\HWA-GARDEN.Data.Utilities.csproj", "{2ACC7ED2-C965-43AE-BA38-587EBC84A24A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN.Data.Utilities", "HWA-GARDEN.Data.Utilities\HWA-GARDEN.Data.Utilities.csproj", "{2ACC7ED2-C965-43AE-BA38-587EBC84A24A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN.RabbitMQ", "HWA-GARDEN.RabbitMQ\HWA-GARDEN.RabbitMQ.csproj", "{29646417-B17A-476B-8256-767B5EAF52BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN.RabbitMQ", "HWA-GARDEN.RabbitMQ\HWA-GARDEN.RabbitMQ.csproj", "{29646417-B17A-476B-8256-767B5EAF52BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CalendarService", "CalendarService", "{909F21DA-C97E-4F65-8121-D174AC2C1EF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-CalendarService.Tests", "Tests\CalendarService\HWA-GARDEN-CalendarService.Tests\HWA-GARDEN-CalendarService.Tests.csproj", "{A283339A-CFF5-47E9-9A93-8AD1078FA44A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-CalendarService.Tests", "Tests\CalendarService\HWA-GARDEN-CalendarService.Tests\HWA-GARDEN-CalendarService.Tests.csproj", "{A283339A-CFF5-47E9-9A93-8AD1078FA44A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN.AzureServiceBus", "HWA-GARDEN.AzureServiceBus\HWA-GARDEN.AzureServiceBus.csproj", "{2376208A-6794-4868-874F-8090928EFFCB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{BAFFCDE5-E080-442B-ADBA-CBACD64C7B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN.KeyGen", "Tools\HWA-GARDEN.KeyGen\HWA-GARDEN.KeyGen.csproj", "{42A95417-49F1-4A8D-A5F2-B30768F30F7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,10 +129,10 @@ Global
 		{A283339A-CFF5-47E9-9A93-8AD1078FA44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A283339A-CFF5-47E9-9A93-8AD1078FA44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A283339A-CFF5-47E9-9A93-8AD1078FA44A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2376208A-6794-4868-874F-8090928EFFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2376208A-6794-4868-874F-8090928EFFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2376208A-6794-4868-874F-8090928EFFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2376208A-6794-4868-874F-8090928EFFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A95417-49F1-4A8D-A5F2-B30768F30F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A95417-49F1-4A8D-A5F2-B30768F30F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A95417-49F1-4A8D-A5F2-B30768F30F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A95417-49F1-4A8D-A5F2-B30768F30F7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +151,7 @@ Global
 		{9FAA020D-686D-451A-9062-CC29D38C9606} = {3DE101F6-457A-43A8-AB7F-6CB28FC13C07}
 		{909F21DA-C97E-4F65-8121-D174AC2C1EF3} = {B39CA626-3FE9-46F9-BD53-185B399C9BC2}
 		{A283339A-CFF5-47E9-9A93-8AD1078FA44A} = {909F21DA-C97E-4F65-8121-D174AC2C1EF3}
+		{42A95417-49F1-4A8D-A5F2-B30768F30F7A} = {BAFFCDE5-E080-442B-ADBA-CBACD64C7B05}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B616CB3A-8723-4ACC-B8A0-51596AB455F8}

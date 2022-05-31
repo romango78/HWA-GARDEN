@@ -11,24 +11,37 @@ namespace HWA.GARDEN.CalendarService.Comsumers
     public class GetCalendarListConsumer : IConsumer<GetCalendarList>
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<GetCalendarListConsumer> _logger;
 
-        public GetCalendarListConsumer(IMediator mediator)
+        public GetCalendarListConsumer(IMediator mediator, ILogger<GetCalendarListConsumer> logger)
         {
             Requires.NotNull(mediator, nameof(mediator));
+            Requires.NotNull(logger, nameof(logger));
 
             _mediator = mediator;
+            _logger = logger;
         }
 
         async Task IConsumer<GetCalendarList>.Consume(ConsumeContext<GetCalendarList> context)
-        {
-            IList<Calendar> result = 
-                await _mediator.CreateStream(new CalendarListQuery { Year = context.Message.Year }, context.CancellationToken)                
-                .ToListAsync();
-
-            await context.RespondAsync<CalendarList>(new
+        {            
+            try
             {
-                Calendars = result
-            });
+                IList<Calendar> result =
+                    await _mediator.CreateStream(new CalendarListQuery { Year = context.Message.Year }, context.CancellationToken)
+                    .ToListAsync();
+
+                await context.RespondAsync<CalendarList>(new
+                {
+                    Calendars = result
+                });
+
+                _logger.LogInformation("The \"Get-Calendar-List\" request was processed...");
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "The calendar data was not retrieved");
+                throw;
+            }
         }
     }
 }

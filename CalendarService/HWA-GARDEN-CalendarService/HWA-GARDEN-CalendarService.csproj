@@ -6,17 +6,30 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>HWA.GARDEN.CalendarService</RootNamespace>
     <UserSecretsId>54e05cef-6e16-4301-8d97-6c90407156c0</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\HWA-GARDEN.AzureServiceBus\HWA-GARDEN.AzureServiceBus.csproj" />
     <ProjectReference Include="..\..\HWA-GARDEN.Contracts\HWA-GARDEN.Contracts.csproj" />
     <ProjectReference Include="..\..\HWA-GARDEN.Utilities\HWA-GARDEN.Utilities.csproj" />
     <ProjectReference Include="..\HWA-GARDEN-CalendarService.Domain\HWA-GARDEN-CalendarService.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="keys\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="keys\key-d3e298b9-4285-4d1e-af04-25a71a687e0c.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
