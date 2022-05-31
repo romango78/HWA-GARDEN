@@ -61,7 +61,7 @@ namespace HWA.GARDEN.CalendarService.Domain {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is deafult calendar that includes all unattached events (that are not included in any calendar)..
+        ///   Looks up a localized string similar to This is default calendar that includes all unattached events (they are not included in any user&apos;s calendar)..
         /// </summary>
         internal static string DefaultCalendarDescription {
             get {

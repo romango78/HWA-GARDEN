@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DefaultCalendarDescription" xml:space="preserve">
-    <value>This is deafult calendar that includes all unattached events (that are not included in any calendar).</value>
+    <value>This is default calendar that includes all unattached events (they are not included in any user's calendar).</value>
   </data>
   <data name="DefaultCalendarName" xml:space="preserve">
     <value>(default)</value>
