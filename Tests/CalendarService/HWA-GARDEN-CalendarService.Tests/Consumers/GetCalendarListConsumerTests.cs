@@ -10,7 +10,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace HWA.GARDEN.CalendarService.Tests
+namespace HWA.GARDEN.CalendarService.Tests.Consumers
 {
     public class GetCalendarListConsumerTests
     {
@@ -29,7 +29,7 @@ namespace HWA.GARDEN.CalendarService.Tests
                 }).ToAsyncEnumerable());
 
             await using ServiceProvider? provider = SetupServiceProvider(mediator);
-            
+
             ITestHarness? harness = provider.GetRequiredService<ITestHarness>();
             await harness.Start();
 
@@ -38,7 +38,7 @@ namespace HWA.GARDEN.CalendarService.Tests
             // Act
             var result = await sut.GetResponse<CalendarList>(new
             {
-                Year = Year
+                Year
             });
 
             // Asserts

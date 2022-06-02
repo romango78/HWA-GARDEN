@@ -16,7 +16,7 @@ namespace HWA.GARDEN.CalendarService.Data.Dependencies
 
             builder.AddScoped<IConnectionFactory, ConnectionFactory>();
 
-            builder.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.AddTransient<IUnitOfWork, UnitOfWork>();
             builder.AddScoped<Func<IUnitOfWork>>(sp => () => { return sp.GetRequiredService<IUnitOfWork>(); });
         }
     }

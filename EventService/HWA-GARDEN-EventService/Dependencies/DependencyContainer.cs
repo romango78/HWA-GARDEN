@@ -1,18 +1,46 @@
 ﻿using Fonlow.DateOnlyExtensions;
+using HWA.GARDEN.Contracts.Results;
 using HWA.GARDEN.Security;
+using MassTransit;
+using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace HWA.GARDEN.EventService.Dependencies
 {
     internal static class DependencyContainer
     {
-        public static void Init(IServiceCollection builder, string connectionString)
-        {            
-            builder.AddScoped<ISecurityContext, SecurityContext>((config) =>
+        private const string AzureServiceBusConnectionConfigKey = "AzureServiceBusConnectionString";
+        private const string ConnectionStringConfigKey = "DefaultConnectionString";
+        private const string DataProtectionApplicationNameConfigKey = "DataProtectionApplicationName";
+        private const string DataProtectionPurposeConfigKey = "DataProtectionPurpose";
+        private const string DataProtectionStorageFolderConfigKey = "DataProtectionStorageFolder";
+
+        public static void Init(IServiceCollection builder, ConfigurationManager configManager)
+        {
+            builder.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(
+                    Path.Combine(AppContext.BaseDirectory, configManager[DataProtectionStorageFolderConfigKey]))
+                ).SetApplicationName(configManager[DataProtectionApplicationNameConfigKey]);
+            builder.AddMediatR(typeof(DependencyContainer));
+            builder.AddMassTransit(config =>
             {
-                return new SecurityContext(connectionString);
+                config.AddRequestClient<CalendarList>();
+
+                config.UsingAzureServiceBus((context, azureConfig) =>
+                {
+                    azureConfig.Host(configManager.GetConnectionString(AzureServiceBusConnectionConfigKey));
+
+                    azureConfig.ConfigureEndpoints(context);
+                });
             });
 
-            Domain.Dependencies.DependencyContainer.Init(builder);
+            builder.AddScoped<ISecurityContext, SecurityContext>((config) =>
+            {
+                IDataProtectionProvider? dataProtectionProvider = config.GetRequiredService<IDataProtectionProvider>();
+                return new SecurityContext(dataProtectionProvider,
+                    configManager.GetConnectionString(ConnectionStringConfigKey),
+                    configManager[DataProtectionPurposeConfigKey]);
+            });           
             
             builder.AddControllers().AddNewtonsoftJson(options =>
             {
@@ -20,6 +48,8 @@ namespace HWA.GARDEN.EventService.Dependencies
                 options.SerializerSettings.Converters.Add(new DateOnlyJsonConverter());
                 options.SerializerSettings.Converters.Add(new DateOnlyNullableJsonConverter());
             });
+
+            Domain.Dependencies.DependencyContainer.Init(builder);
         }
     }
 }

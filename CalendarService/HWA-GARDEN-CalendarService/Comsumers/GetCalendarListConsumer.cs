@@ -23,7 +23,7 @@ namespace HWA.GARDEN.CalendarService.Comsumers
         }
 
         async Task IConsumer<GetCalendarList>.Consume(ConsumeContext<GetCalendarList> context)
-        {            
+        {
             try
             {
                 IList<Calendar> result =

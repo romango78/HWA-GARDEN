@@ -14,7 +14,7 @@ namespace HWA.GARDEN.EventService.Data.Repositories
         public Task<EventGroupEntity> GetAsync(int id, CancellationToken cancellationToken)
         {
             // TODO: Replace hardcoded SQL on LINQ expression
-            var sql = $"SELECT * FROM [dbo].[EventGroup] WHERE [Id] = {id}";
+            var sql = $"SELECT * FROM [eso].[EventGroup] WHERE [Id] = {id}";
 
             var command = new CommandDefinition(sql, transaction: Transaction, cancellationToken: cancellationToken);
             return Connection.QueryFirstOrDefaultAsync<EventGroupEntity>(command);
@@ -24,7 +24,7 @@ namespace HWA.GARDEN.EventService.Data.Repositories
             CancellationToken cancellationToken)
         {
             // TODO: Replace hardcoded SQL on LINQ expression
-            var sql = $"SELECT EG.* FROM [dbo].[Event] E INNER JOIN [dbo].[EventGroup] EG ON E.[EventGroupID] = EG.[ID] WHERE E.[StartDt] <= {endDt} AND E.[EndDt] >= {startDt} AND (E.CalendarID IS NULL OR E.CalendarID = {calendarId})";
+            var sql = $"SELECT EG.* FROM [eso].[Event] E INNER JOIN [eso].[EventGroup] EG ON E.[EventGroupID] = EG.[ID] WHERE E.[StartDt] <= {endDt} AND E.[EndDt] >= {startDt} AND (E.CalendarID IS NULL OR E.CalendarID = {calendarId})";
 
             var command = new CommandDefinition(sql, transaction: Transaction, cancellationToken: cancellationToken);
             return Connection.QueryAsync<EventGroupEntity>(command);                        

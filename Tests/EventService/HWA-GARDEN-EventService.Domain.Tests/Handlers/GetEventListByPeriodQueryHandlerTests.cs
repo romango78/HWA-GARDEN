@@ -3,14 +3,15 @@ using HWA.GARDEN.Contracts;
 using HWA.GARDEN.EventService.Data;
 using HWA.GARDEN.EventService.Data.Entities;
 using HWA.GARDEN.EventService.Data.Repositories;
+using HWA.GARDEN.EventService.Domain.Handlers;
 using HWA.GARDEN.EventService.Domain.Requests;
 using MediatR;
 using Moq;
 
-namespace HWA.GARDEN.EventService.Domain.Tests
+namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
 {
     [Trait("TestCategory", "UnitTest")]
-    public class EventServiceTests
+    public class GetEventListByPeriodQueryHandlerTests
     {
         [Fact]
         public async Task Should_GetEventsForTimePeriod_InsideOneYear()
@@ -21,8 +22,11 @@ namespace HWA.GARDEN.EventService.Domain.Tests
 
             var mediator = Mock.Of<IMediator>();
             Mock.Get(mediator)
-                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == start.Year), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new Calendar { Id = 1, Name = "2022", Year = 2022 }));
+                .Setup(c => c.CreateStream(It.Is<GetCalendarListQuery>(a => a.Year == start.Year), It.IsAny<CancellationToken>()))
+                .Returns((new[]
+                {
+                    new Calendar { Id = 1, Name = "2022", Year = 2022 }
+                }).ToAsyncEnumerable());
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -56,11 +60,12 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return uow;
             };
 
-            var sut = new EventService(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
-            await foreach (var item in sut.GetEventsAsync(start, end, CancellationToken.None))
+            await foreach (var item in sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
+                , CancellationToken.None))
             {
                 item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
                     && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
@@ -79,11 +84,17 @@ namespace HWA.GARDEN.EventService.Domain.Tests
 
             var mediator = Mock.Of<IMediator>();
             Mock.Get(mediator)
-                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == start.Year), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new Calendar { Id = 1, Name = "2022", Year = 2022 }));
+                .Setup(c => c.CreateStream(It.Is<GetCalendarListQuery>(a => a.Year == start.Year), It.IsAny<CancellationToken>()))
+                .Returns((new[]
+                {
+                    new Calendar { Id = 1, Name = "2022", Year = 2022 }
+                }).ToAsyncEnumerable());
             Mock.Get(mediator)
-                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == end.Year), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new Calendar { Id = 2, Name = "2023", Year = 2023 }));
+                .Setup(c => c.CreateStream(It.Is<GetCalendarListQuery>(a => a.Year == end.Year), It.IsAny<CancellationToken>()))
+                .Returns((new[]
+                {
+                    new Calendar { Id = 2, Name = "2023", Year = 2023 }
+                }).ToAsyncEnumerable());
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -126,11 +137,12 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return uow;
             };
 
-            var sut = new EventService(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
-            await foreach (var item in sut.GetEventsAsync(start, end, CancellationToken.None))
+            await foreach (var item in sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
+                , CancellationToken.None))
             {
                 item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
                     && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
@@ -139,7 +151,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             }
             count.Should().Be(6);
         }
-        
+
         [Fact]
         public async Task Should_GetEventsForWholeYear()
         {
@@ -149,11 +161,17 @@ namespace HWA.GARDEN.EventService.Domain.Tests
 
             var mediator = Mock.Of<IMediator>();
             Mock.Get(mediator)
-                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == 2022), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new Calendar { Id = 1, Name = "2022", Year = 2022 }));
+                .Setup(c => c.CreateStream(It.Is<GetCalendarListQuery>(a => a.Year == 2022), It.IsAny<CancellationToken>()))
+                .Returns((new[]
+                {
+                    new Calendar { Id = 1, Name = "2022", Year = 2022 }
+                }).ToAsyncEnumerable());
             Mock.Get(mediator)
-                .Setup(c => c.Send(It.Is<CalendarListQuery>(a => a.Year == 2023), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new Calendar { Id = 2, Name = "2023", Year = 2023 }));
+                .Setup(c => c.CreateStream(It.Is<GetCalendarListQuery>(a => a.Year == 2023), It.IsAny<CancellationToken>()))
+                .Returns((new[]
+                {
+                    new Calendar { Id = 2, Name = "2023", Year = 2023 }
+                }).ToAsyncEnumerable());
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -195,11 +213,12 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return uow;
             };
 
-            var sut = new EventService(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
-            await foreach (var item in sut.GetEventsAsync(start, end, CancellationToken.None))
+            await foreach (var item in sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
+                , CancellationToken.None))
             {
                 item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
                     && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
@@ -208,7 +227,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             }
             count.Should().Be(6);
         }
-        
+
         [Fact]
         public async Task Should_ThrowException_WhenEndDateLessStartDate()
         {
@@ -222,15 +241,16 @@ namespace HWA.GARDEN.EventService.Domain.Tests
                 return Mock.Of<IUnitOfWork>();
             };
 
-            var sut = new EventService(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
 
             // Act 
-            Func<Task> func = async () => await sut.GetEventsAsync(start, end, CancellationToken.None).FirstAsync();
+            Func<Task> func = async () => await sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
+                , CancellationToken.None).FirstAsync();
 
             // Asserts
             await func.Should().ThrowAsync<InvalidOperationException>();
         }
-        
+
         [Fact]
         public async Task Should_OperationCancelled_ByRequest()
         {
@@ -240,8 +260,11 @@ namespace HWA.GARDEN.EventService.Domain.Tests
 
             var mediator = Mock.Of<IMediator>();
             Mock.Get(mediator)
-                .Setup(c => c.Send(It.IsAny<CalendarListQuery>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(new Calendar()));
+                .Setup(c => c.CreateStream(It.IsAny<GetCalendarListQuery>(), It.IsAny<CancellationToken>()))
+                .Returns((new[]
+                {
+                    new Calendar()
+                }).ToAsyncEnumerable());
 
             var eventRepo = Mock.Of<IEventRepository>();
             Mock.Get(eventRepo)
@@ -268,10 +291,11 @@ namespace HWA.GARDEN.EventService.Domain.Tests
             var source = new CancellationTokenSource();
             var cancellationToken = source.Token;
 
-            var sut = new EventService(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
 
             // Act 
-            Func<Task> func = async () => await sut.GetEventsAsync(start, end, cancellationToken)
+            Func<Task> func = async () => await sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
+                , cancellationToken)
                 .GetAsyncEnumerator(cancellationToken)
                 .MoveNextAsync();
 
@@ -279,6 +303,6 @@ namespace HWA.GARDEN.EventService.Domain.Tests
 
             // Asserts
             await func.Should().ThrowAsync<OperationCanceledException>();
-        }        
+        }
     }
 }

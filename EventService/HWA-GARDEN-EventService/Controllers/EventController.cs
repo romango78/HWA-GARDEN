@@ -1,5 +1,7 @@
 ﻿using HWA.GARDEN.Contracts;
-using HWA.GARDEN.EventService.Domain;
+using HWA.GARDEN.EventService.Domain.Requests;
+using HWA.GARDEN.Utilities.Validation;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HWA.GARDEN.EventService.Controllers
@@ -8,13 +10,13 @@ namespace HWA.GARDEN.EventService.Controllers
     [Route("api/v1/[controller]")]
     public class EventController : Controller
     {
-        private readonly IEventService _eventService;
+        private readonly IMediator _mediator;
 
-        public EventController(IEventService eventService)
+        public EventController(IMediator mediator)
         {
-            // TODO: ADD PARAMETERS VALIDATION
+            Requires.NotNull(mediator, nameof(mediator));
 
-            _eventService = eventService;
+            _mediator = mediator;
         }
 
         // GET api/v1/[controller]/items[?startDate=...&endDate=...]
@@ -22,7 +24,8 @@ namespace HWA.GARDEN.EventService.Controllers
         [Route("items")]
         //[ProducesResponseType(typeof(Event), StatusCodes.Status200OK)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IAsyncEnumerable<Event> GetEventsAsync([FromQuery]string startDate, [FromQuery] string endDate)
+        public IAsyncEnumerable<Event> GetEventsAsync([FromQuery]string startDate, [FromQuery] string endDate
+            , CancellationToken cancellationToken)
         {
             DateOnly start, end;
             if(!DateOnly.TryParse(startDate, out start))
@@ -34,7 +37,7 @@ namespace HWA.GARDEN.EventService.Controllers
                 throw new InvalidOperationException($"The wrong value has been provided for \"{nameof(endDate)}\" parameter.");
             }
 
-            return _eventService.GetEventsAsync(start, end);
+            return _mediator.CreateStream(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }, cancellationToken);
         }
     }
 }

@@ -1,8 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-HWA.GARDEN.EventService.Dependencies.DependencyContainer.Init(builder.Services, 
-    builder.Configuration["DefaultConnectionString"]);
+HWA.GARDEN.EventService.Dependencies.DependencyContainer.Init(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
 //services.AddControllers(o => o.Filters.AddMediatrExceptions());
@@ -18,8 +17,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

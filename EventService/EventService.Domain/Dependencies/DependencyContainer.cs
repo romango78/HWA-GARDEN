@@ -7,11 +7,9 @@ namespace HWA.GARDEN.EventService.Domain.Dependencies
     {
         public static void Init(IServiceCollection builder)
         {
-            Data.Dependencies.DependencyContainer.Init(builder);
-
-            builder.AddScoped<IEventService, EventService>();
-
             builder.AddMediatR(typeof(DependencyContainer));
+
+            Data.Dependencies.DependencyContainer.Init(builder);            
         }
     }
 }

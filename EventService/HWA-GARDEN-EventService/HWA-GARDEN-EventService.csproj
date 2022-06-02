@@ -11,12 +11,19 @@
 
   <ItemGroup>
     <PackageReference Include="Fonlow.DateOnlyExtensions" Version="1.2.0" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EventService.Domain\HWA-GARDEN-EventService.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="keys\key-d3e298b9-4285-4d1e-af04-25a71a687e0c.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
