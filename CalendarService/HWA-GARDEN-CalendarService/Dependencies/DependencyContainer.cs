@@ -4,6 +4,7 @@ using MediatR;
 using MassTransit;
 using Microsoft.AspNetCore.DataProtection;
 using System.Security.Cryptography;
+using HWA.GARDEN.Utilities.Extensions;
 
 namespace HWA.GARDEN.CalendarService.Dependencies
 {
@@ -53,7 +54,8 @@ namespace HWA.GARDEN.CalendarService.Dependencies
                     configManager.GetConnectionString(ConnectionStringConfigKey),
                     configManager[DataProtectionPurposeConfigKey]);
             });
-            
+
+            builder.AddExceptionHandlingBasePolicies();
             Domain.Dependencies.DependencyContainer.Init(builder);
         }
     }

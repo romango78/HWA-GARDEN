@@ -7,12 +7,15 @@
     <RootNamespace>HWA.GARDEN.EventService</RootNamespace>
     <AssemblyName>HWA-GARDEN-EventService</AssemblyName>
     <UserSecretsId>76b885b6-93fa-41d9-a347-fb8638f6a5d4</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Fonlow.DateOnlyExtensions" Version="1.2.0" />
     <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

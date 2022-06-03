@@ -28,11 +28,6 @@ namespace HWA.GARDEN.EventService.Domain.Handlers
         public async IAsyncEnumerable<Event> Handle(GetEventListByPeriodQuery request
             , [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            if (request.StartDate > request.EndDate)
-            {
-                throw new InvalidOperationException("The satrt date should be equal or less than end date.");
-            }
-
             do
             {
                 await foreach (Event item in

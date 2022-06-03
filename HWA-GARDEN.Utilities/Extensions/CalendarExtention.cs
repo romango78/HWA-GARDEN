@@ -28,5 +28,15 @@
             }
             return result;
         }
+
+        public static DateOnly ToDateOnly(this string value)
+        {
+            DateOnly result;
+            if (!DateOnly.TryParse(value, out result))
+            {
+                throw new InvalidOperationException($"The '{value}' cannot be converted to DateOnly type.");
+            }
+            return result;
+        }
     }
 }

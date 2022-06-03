@@ -1,6 +1,7 @@
 ﻿using Fonlow.DateOnlyExtensions;
 using HWA.GARDEN.Contracts.Results;
 using HWA.GARDEN.Security;
+using HWA.GARDEN.Utilities.Extensions;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.DataProtection;
@@ -21,7 +22,7 @@ namespace HWA.GARDEN.EventService.Dependencies
                 .PersistKeysToFileSystem(new DirectoryInfo(
                     Path.Combine(AppContext.BaseDirectory, configManager[DataProtectionStorageFolderConfigKey]))
                 ).SetApplicationName(configManager[DataProtectionApplicationNameConfigKey]);
-            builder.AddMediatR(typeof(DependencyContainer));
+            builder.AddMediatR(typeof(DependencyContainer).Assembly);
             builder.AddMassTransit(config =>
             {
                 config.AddRequestClient<CalendarList>();
@@ -49,6 +50,7 @@ namespace HWA.GARDEN.EventService.Dependencies
                 options.SerializerSettings.Converters.Add(new DateOnlyNullableJsonConverter());
             });
 
+            builder.AddExceptionHandlingBasePolicies();
             Domain.Dependencies.DependencyContainer.Init(builder);
         }
     }

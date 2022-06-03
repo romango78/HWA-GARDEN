@@ -3,11 +3,13 @@ using HWA.GARDEN.Contracts;
 using HWA.GARDEN.Utilities.Validation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 
 namespace HWA.GARDEN.CalendarService.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1")]
     public class CalendarController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,10 +21,12 @@ namespace HWA.GARDEN.CalendarService.Controllers
             _mediator = mediator;
         }
 
-        // GET api/v1/[controller]/items[?year=...]
-        [HttpGet]
-        [Route("items")]
-        public IAsyncEnumerable<Calendar> GetCalendarListAsync([FromQuery] int year, CancellationToken cancellationToken)
+        // GET api/v1/calendars[?year=...]
+        [HttpGet("calendars")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IAsyncEnumerable<Calendar>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IAsyncEnumerable<Calendar> GetCalendarListAsync([Required] int year, CancellationToken cancellationToken)
         {
             return _mediator.CreateStream(new CalendarListQuery { Year = year }, cancellationToken);
         }
