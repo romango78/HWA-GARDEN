@@ -8,8 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["EventService/HWA-GARDEN-EventService/HWA-GARDEN-EventService.csproj", "EventService/HWA-GARDEN-EventService/"]
-COPY ["EventService/EventService.Domain/HWA-GARDEN-EventService.Domain.csproj", "EventService/EventService.Domain/"]
-COPY ["EventService/EventService.DataAccess/HWA-GARDEN-EventService.Data.csproj", "EventService/EventService.DataAccess/"]
+COPY ["EventService/HWA-GARDEN-EventService.Domain/HWA-GARDEN-EventService.Domain.csproj", "EventService/EventService.Domain/"]
+COPY ["EventService/HWA-GARDEN-EventService.Data/HWA-GARDEN-EventService.Data.csproj", "EventService/EventService.DataAccess/"]
 COPY ["HWA-GARDEN.Data.Utilities/HWA-GARDEN.Data.Utilities.csproj", "HWA-GARDEN.Data.Utilities/"]
 COPY ["HWA-GARDEN.Utilities/HWA-GARDEN.Utilities.csproj", "HWA-GARDEN.Utilities/"]
 COPY ["HWA-GARDEN.Data/HWA-GARDEN.Data.csproj", "HWA-GARDEN.Data/"]
