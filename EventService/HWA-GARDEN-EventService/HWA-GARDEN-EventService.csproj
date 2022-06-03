@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventService.Domain\HWA-GARDEN-EventService.Domain.csproj" />
+    <ProjectReference Include="..\HWA-GARDEN-EventService.Domain\HWA-GARDEN-EventService.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
