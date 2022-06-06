@@ -17,7 +17,7 @@ namespace HWA.GARDEN.EventService.Data.Repositories
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             // TODO: Replace hardcoded SQL on LINQ expression
-            var sql = $"SELECT * FROM [eso].[Event] WHERE [StartDt] <= {endDt} AND [EndDt] >= {startDt} AND (CalendarID IS NULL OR CalendarID = {calendarId})";
+            var sql = $"SELECT * FROM [eso].[Event] WHERE [StartDt] <= {endDt} AND [EndDt] >= {startDt} AND IsNull(CalendarID,0) = {calendarId}";
 
             var command = new CommandDefinition(sql, transaction: Transaction, cancellationToken: cancellationToken);
             using (var reader = await Connection.ExecuteReaderAsync(command).ConfigureAwait(false))
