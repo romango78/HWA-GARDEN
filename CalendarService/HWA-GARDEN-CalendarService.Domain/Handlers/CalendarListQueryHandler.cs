@@ -1,6 +1,6 @@
-﻿using HWA.GARDEN.CalendarService.Data;
+﻿using AutoMapper;
+using HWA.GARDEN.CalendarService.Data;
 using HWA.GARDEN.CalendarService.Data.Entities;
-using HWA.GARDEN.CalendarService.Domain.Adaptors;
 using HWA.GARDEN.CalendarService.Domain.Requests;
 using HWA.GARDEN.Contracts;
 using HWA.GARDEN.Utilities.Validation;
@@ -11,14 +11,15 @@ namespace HWA.GARDEN.CalendarService.Domain.Handlers
 {
     public sealed class CalendarListQueryHandler : IStreamRequestHandler<CalendarListQuery, Calendar>
     {
-        private const int DefaultCalendarId = 0;
-
+        private readonly IMapper _mapper;
         private readonly Func<IUnitOfWork> _unitOfWorkFactory;
 
-        public CalendarListQueryHandler(Func<IUnitOfWork> unitOfWorkFactory)
+        public CalendarListQueryHandler(IMapper mapper, Func<IUnitOfWork> unitOfWorkFactory)
         {
+            Requires.NotNull(mapper, nameof(mapper));
             Requires.NotNull(unitOfWorkFactory, nameof(unitOfWorkFactory));
 
+            _mapper = mapper;
             _unitOfWorkFactory = unitOfWorkFactory;
         }
 
@@ -32,15 +33,9 @@ namespace HWA.GARDEN.CalendarService.Domain.Handlers
                     .WithCancellation(cancellationToken)
                     .ConfigureAwait(false))
                 {
-                    yield return new CalendarAdaptor(item);
+                    yield return _mapper.Map<Calendar>(item);
                 }
-                yield return new Calendar
-                {
-                    Id = DefaultCalendarId,
-                    Name = Strings.DefaultCalendarName,
-                    Description = Strings.DefaultCalendarDescription,
-                    Year = request.Year
-                };
+                yield return _mapper.Map<Calendar>(request);
             }
         }
     }

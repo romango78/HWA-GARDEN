@@ -55,7 +55,9 @@ namespace HWA.GARDEN.CalendarService.Dependencies
                     configManager[DataProtectionPurposeConfigKey]);
             });
 
-            builder.AddExceptionHandlingBasePolicies();
+            builder.AddExceptionHandlingBasePolicies()
+                .AddAutoMapper(typeof(DependencyContainer).Assembly);
+
             Domain.Dependencies.DependencyContainer.Init(builder);
         }
     }

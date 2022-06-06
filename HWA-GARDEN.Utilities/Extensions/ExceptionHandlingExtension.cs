@@ -12,12 +12,12 @@ namespace HWA.GARDEN.Utilities.Extensions
 #pragma warning disable CS0618 // Type or member is obsolete
     public static class ExceptionHandlingExtension
     {
-        public static void AddExceptionHandlingBasePolicies(this IServiceCollection services)
+        public static IServiceCollection AddExceptionHandlingBasePolicies(this IServiceCollection services)
         {
-            services.AddExceptionHandlingBasePolicies(null);
+            return services.AddExceptionHandlingBasePolicies(null);
         }
 
-        public static void AddExceptionHandlingBasePolicies(this IServiceCollection services, Action<IExceptionPolicyBuilder>? builder)
+        public static IServiceCollection AddExceptionHandlingBasePolicies(this IServiceCollection services, Action<IExceptionPolicyBuilder>? builder)
         {
             services.AddExceptionHandlingPolicies(policy =>
             {
@@ -59,6 +59,8 @@ namespace HWA.GARDEN.Utilities.Extensions
                         })
                     .Handled();
             });
+
+            return services;
         }
     }
 #pragma warning restore CS0618 // Type or member is obsolete

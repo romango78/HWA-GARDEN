@@ -1,7 +1,7 @@
-﻿using HWA.GARDEN.Contracts;
+﻿using AutoMapper;
+using HWA.GARDEN.Contracts;
 using HWA.GARDEN.EventService.Data;
 using HWA.GARDEN.EventService.Data.Entities;
-using HWA.GARDEN.EventService.Domain.Adaptors;
 using HWA.GARDEN.EventService.Domain.Requests;
 using HWA.GARDEN.Utilities.Extensions;
 using HWA.GARDEN.Utilities.Validation;
@@ -13,21 +13,29 @@ namespace HWA.GARDEN.EventService.Domain.Handlers
     public sealed class GetEventListByPeriodQueryHandler
         : IStreamRequestHandler<GetEventListByPeriodQuery, Event>
     {
+        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
         private readonly Func<IUnitOfWork> _unitOfWorkFactory;
 
-        public GetEventListByPeriodQueryHandler(IMediator mediator, Func<IUnitOfWork> unitOfWorkFactory)
+        public GetEventListByPeriodQueryHandler(IMediator mediator, IMapper mapper, Func<IUnitOfWork> unitOfWorkFactory)
         {
             Requires.NotNull(mediator, nameof(mediator));
+            Requires.NotNull(mapper, nameof(mapper));
             Requires.NotNull(unitOfWorkFactory, nameof(unitOfWorkFactory));
 
             _mediator = mediator;
+            _mapper = mapper;
             _unitOfWorkFactory = unitOfWorkFactory;
         }
 
         public async IAsyncEnumerable<Event> Handle(GetEventListByPeriodQuery request
             , [EnumeratorCancellation] CancellationToken cancellationToken)
         {
+            if (request.StartDate > request.EndDate)
+            {
+                throw new ArgumentException();
+            }
+
             do
             {
                 await foreach (Event item in
@@ -48,7 +56,7 @@ namespace HWA.GARDEN.EventService.Domain.Handlers
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             await foreach (Calendar? calendar in
-                _mediator.CreateStream(new GetCalendarListQuery { Year = startDate.Year }, cancellationToken)
+                _mediator.CreateStream(_mapper.Map<GetCalendarListQuery>(startDate), cancellationToken)
                 .ConfigureAwait(false))
             {
                 await foreach (Event? item in GetEventsForPeriodInSpecificCalendarAsync(startDate, endDate, calendar)
@@ -81,7 +89,7 @@ namespace HWA.GARDEN.EventService.Domain.Handlers
                     .WithCancellation(cancellationToken).ConfigureAwait(false))
                 {
                     EventGroupEntity eventGroup = eventGroupList.FirstOrDefault(w => w.Id == item.EventGroupId);
-                    yield return new EventAdaptor(item, eventGroup, calendar);
+                    yield return _mapper.Map<Event>((item, eventGroup, calendar));
                 }
             }
         }

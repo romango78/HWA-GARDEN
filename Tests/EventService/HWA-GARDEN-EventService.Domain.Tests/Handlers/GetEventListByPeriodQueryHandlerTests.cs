@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentAssertions;
 using HWA.GARDEN.Contracts;
 using HWA.GARDEN.EventService.Data;
@@ -60,7 +61,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
                 return uow;
             };
 
-            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, GetMapper(), unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
@@ -74,7 +75,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
             }
             count.Should().Be(4);
         }
-
+        
         [Fact]
         public async Task Should_GetEventsForTimePeriod_InsideTwoYears()
         {
@@ -137,7 +138,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
                 return uow;
             };
 
-            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, GetMapper(), unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
@@ -213,7 +214,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
                 return uow;
             };
 
-            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, GetMapper(), unitOfWorkFactory);
 
             // Act & Asserts
             int count = 0;
@@ -241,14 +242,14 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
                 return Mock.Of<IUnitOfWork>();
             };
 
-            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, GetMapper(), unitOfWorkFactory);
 
             // Act 
             Func<Task> func = async () => await sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
                 , CancellationToken.None).FirstAsync();
 
             // Asserts
-            await func.Should().ThrowAsync<InvalidOperationException>();
+            await func.Should().ThrowAsync<ArgumentException>();
         }
 
         [Fact]
@@ -291,7 +292,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
             var source = new CancellationTokenSource();
             var cancellationToken = source.Token;
 
-            var sut = new GetEventListByPeriodQueryHandler(mediator, unitOfWorkFactory);
+            var sut = new GetEventListByPeriodQueryHandler(mediator, GetMapper(), unitOfWorkFactory);
 
             // Act 
             Func<Task> func = async () => await sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
@@ -303,6 +304,12 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
 
             // Asserts
             await func.Should().ThrowAsync<OperationCanceledException>();
+        }
+        
+        private IMapper GetMapper()
+        {
+            var mapperCfg = new MapperConfiguration(cfg => cfg.AddMaps(typeof(GetCalendarListQuery).Assembly));
+            return mapperCfg.CreateMapper();
         }
     }
 }

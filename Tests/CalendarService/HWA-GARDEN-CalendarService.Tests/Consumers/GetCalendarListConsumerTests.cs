@@ -61,6 +61,7 @@ namespace HWA.GARDEN.CalendarService.Tests.Consumers
                     config.AddConsumer<GetCalendarListConsumer>();
                 })
                 .AddScoped(o => mediator)
+                .AddAutoMapper(typeof(GetCalendarListConsumer).Assembly)
                 .BuildServiceProvider(true);
             return provider;
         }

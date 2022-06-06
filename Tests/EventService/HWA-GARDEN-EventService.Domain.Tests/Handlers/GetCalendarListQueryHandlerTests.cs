@@ -50,7 +50,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
 
             IRequestClient<GetCalendarList>? client = harness.GetRequestClient<GetCalendarList>();
 
-            GetCalendarListQueryHandler? sut = new GetCalendarListQueryHandler(client, Mock.Of<ILogger<GetCalendarListQueryHandler>>());
+            GetCalendarListQueryHandler? sut = new GetCalendarListQueryHandler(client);
 
             // Act & Asserts
             int count = 0;
@@ -87,7 +87,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
             var source = new CancellationTokenSource();
             var cancellationToken = source.Token;
 
-            GetCalendarListQueryHandler? sut = new GetCalendarListQueryHandler(client, Mock.Of<ILogger<GetCalendarListQueryHandler>>());
+            GetCalendarListQueryHandler? sut = new GetCalendarListQueryHandler(client);
 
             // Act 
             Func<Task> func = async () => await sut.Handle(new GetCalendarListQuery { Year = 2022 }

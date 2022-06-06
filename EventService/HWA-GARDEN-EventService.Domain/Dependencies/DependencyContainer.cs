@@ -11,6 +11,7 @@ namespace HWA.GARDEN.EventService.Domain.Dependencies
         {
             builder.AddValidatorsFromAssembly(typeof(DependencyContainer).Assembly)
                 .AddMediatR(typeof(DependencyContainer).Assembly)
+                .AddAutoMapper(typeof(DependencyContainer).Assembly)
                 .AddScoped(typeof(IStreamPipelineBehavior<,>), typeof(ValidationStreamBehavior<,>))
                 .AddScoped(typeof(IStreamPipelineBehavior<,>), typeof(LoggingStreamBehavior<,>));
 

@@ -50,7 +50,9 @@ namespace HWA.GARDEN.EventService.Dependencies
                 options.SerializerSettings.Converters.Add(new DateOnlyNullableJsonConverter());
             });
 
-            builder.AddExceptionHandlingBasePolicies();
+            builder.AddExceptionHandlingBasePolicies()
+                .AddAutoMapper(typeof(DependencyContainer).Assembly);
+
             Domain.Dependencies.DependencyContainer.Init(builder);
         }
     }

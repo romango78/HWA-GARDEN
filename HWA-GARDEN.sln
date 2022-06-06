@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Dom
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HWA-GARDEN-EventService.Database", "EventService\HWA-GARDEN-EventService.Database\HWA-GARDEN-EventService.Database.sqlproj", "{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-CalendarService.Domain.Tests", "Tests\CalendarService\HWA-GARDEN-CalendarService.Domain.Tests\HWA-GARDEN-CalendarService.Domain.Tests.csproj", "{3376C3F1-4826-4CA9-B82D-D874E1951089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,10 @@ Global
 		{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +152,7 @@ Global
 		{F96A25EF-D612-4A3C-8BC0-816CA2F8000F} = {A38D0C02-0318-4337-8113-14A5505C8BB4}
 		{E5016F77-807C-4BD4-93DB-CD0A58B085BC} = {A38D0C02-0318-4337-8113-14A5505C8BB4}
 		{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7} = {A38D0C02-0318-4337-8113-14A5505C8BB4}
+		{3376C3F1-4826-4CA9-B82D-D874E1951089} = {909F21DA-C97E-4F65-8121-D174AC2C1EF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B616CB3A-8723-4ACC-B8A0-51596AB455F8}

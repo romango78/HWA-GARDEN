@@ -1,3 +1,4 @@
+using AutoMapper;
 using HWA.GARDEN.CalendarService.Domain.Requests;
 using HWA.GARDEN.Contracts;
 using HWA.GARDEN.Utilities.Validation;
@@ -12,13 +13,16 @@ namespace HWA.GARDEN.CalendarService.Controllers
     [Route("api/v1")]
     public class CalendarController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public CalendarController(IMediator mediator)
+        public CalendarController(IMediator mediator, IMapper mapper)
         {
             Requires.NotNull(mediator, nameof(mediator));
+            Requires.NotNull(mapper, nameof(mapper));
 
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         // GET api/v1/calendars[?year=...]
@@ -28,7 +32,7 @@ namespace HWA.GARDEN.CalendarService.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IAsyncEnumerable<Calendar> GetCalendarListAsync([Required] int year, CancellationToken cancellationToken)
         {
-            return _mediator.CreateStream(new CalendarListQuery { Year = year }, cancellationToken);
+            return _mediator.CreateStream(_mapper.Map<CalendarListQuery>(year), cancellationToken);
         }
     }
 }
