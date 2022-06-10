@@ -1,5 +1,3 @@
-﻿\usepackage{mathtools}
-
 # Intoduction
 
 TBD
@@ -27,4 +25,17 @@ TBD
 ### Sequential Transaction definition
 
 A = </br>
-A' = [[A<sub>1</sub>,A<sub>2</sub>]] = $\langle f \rangle$
+A' = [[A<sub>1</sub> $\cdot$ A<sub>2</sub>┌►B<sub>1</sub>]]<sup>_S_</sup> 
+= $\langle$(
+{an<sub>1</sub>!,cn<sub>1</sub>!},
+$\emptyset$,
+{s<sub>1</sub>,s<sub>2</sub>},
+{s<sub>1</sub>,s<sub>2</sub>,q<sub>0</sub>,q<sub>1</sub>,q<sub>2</sub>,$\odot,\otimes$},
+q<sub>0</sub>,
+$\delta$'},$\mu$')$\rangle$ </br>
+_with_ $\delta$'= {(q<sub>0</sub>,$\tau$,true,$\emptyset$,s<sub>1</sub>),(s<sub>1</sub>,$\boxed{\cdot}$,q<sub>1</sub>),(s<sub>1</sub>,$\boxed{\times}$,s<sub>2</sub>)
+
+_States:_</br>
+q<sub>0</sub> ::= _Initial_</br>
+s<sub>1</sub> ::= _Tryint to get exist calendar by (Name, Year)_
+
