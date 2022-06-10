@@ -5,13 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>HWA.GARDEN.EventService.Domain</RootNamespace>
+    <BaseIntermediateOutputPath>C:\repos\HWA-GARDEN\EventService\HWA-GARDEN-EventService.Domain\obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.0.2" />
-    <PackageReference Include="MassTransit" Version="8.0.2" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
@@ -20,6 +20,21 @@
   <ItemGroup>
     <ProjectReference Include="..\..\HWA-GARDEN.Contracts\HWA-GARDEN.Contracts.csproj" />
     <ProjectReference Include="..\HWA-GARDEN-EventService.Data\HWA-GARDEN-EventService.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Validators\ValidationStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationStrings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Validators\ValidationStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

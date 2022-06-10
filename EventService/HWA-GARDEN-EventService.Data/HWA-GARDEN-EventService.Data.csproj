@@ -5,6 +5,7 @@
     <RootNamespace>HWA.GARDEN.EventService.Data</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <BaseIntermediateOutputPath>C:\repos\HWA-GARDEN\EventService\HWA-GARDEN-EventService.Data\obj</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

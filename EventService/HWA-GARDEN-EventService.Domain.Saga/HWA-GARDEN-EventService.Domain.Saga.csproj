@@ -2,17 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>HWA.GARDEN.Contracts</RootNamespace>
+    <RootNamespace>HWA.GARDEN.EventService.Domain.Saga</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Messages\Saga\" />
+    <ProjectReference Include="..\..\HWA-GARDEN.Contracts\HWA-GARDEN.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

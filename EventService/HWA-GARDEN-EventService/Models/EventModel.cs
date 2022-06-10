@@ -5,6 +5,7 @@ namespace HWA.GARDEN.EventService.Models
 {
     public sealed class EventModel
     {
+        [Required]
         public CalendarModel? Calendar { get; set; }
 
         [Required]

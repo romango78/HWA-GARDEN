@@ -36,12 +36,13 @@ namespace HWA.GARDEN.EventService.Controllers
             return _mediator.CreateStream(_mapper.Map<GetEventListByPeriodQuery>(query), cancellationToken);
         }
 
-        //[Produces(MediaTypeNames.Application.Json)]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public Event CreateEventAsync(EventModel model, CancellationToken cancellationToken)
-        //{
-
-        //}
+        [HttpPost("events")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Event))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public Task<Event> CreateEventAsync(EventModel model, CancellationToken cancellationToken)
+        {
+            return _mediator.Send(_mapper.Map<CreateEventRequest>(model), cancellationToken);
+        }
     }
 }

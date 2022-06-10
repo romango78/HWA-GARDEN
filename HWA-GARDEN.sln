@@ -49,7 +49,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Dom
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HWA-GARDEN-EventService.Database", "EventService\HWA-GARDEN-EventService.Database\HWA-GARDEN-EventService.Database.sqlproj", "{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWA-GARDEN-CalendarService.Domain.Tests", "Tests\CalendarService\HWA-GARDEN-CalendarService.Domain.Tests\HWA-GARDEN-CalendarService.Domain.Tests.csproj", "{3376C3F1-4826-4CA9-B82D-D874E1951089}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-CalendarService.Domain.Tests", "Tests\CalendarService\HWA-GARDEN-CalendarService.Domain.Tests\HWA-GARDEN-CalendarService.Domain.Tests.csproj", "{3376C3F1-4826-4CA9-B82D-D874E1951089}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Domain.Saga", "EventService\HWA-GARDEN-EventService.Domain.Saga\HWA-GARDEN-EventService.Domain.Saga.csproj", "{608D309D-557B-4B00-9FD3-F921898D13EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN-EventService.Domain.Saga.Tests", "Tests\EventService\HWA-GARDEN-EventService.Domain.Saga.Tests\HWA-GARDEN-EventService.Domain.Saga.Tests.csproj", "{BD78B75B-27E7-41D5-8576-4828AA5D3D11}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HWA-GARDEN.Tests.Utilities", "Tests\HWA-GARDEN.Tests.Utilities\HWA-GARDEN.Tests.Utilities.csproj", "{CE634BC0-886F-47DD-AEEF-D21A269E5806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +139,18 @@ Global
 		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3376C3F1-4826-4CA9-B82D-D874E1951089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608D309D-557B-4B00-9FD3-F921898D13EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608D309D-557B-4B00-9FD3-F921898D13EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608D309D-557B-4B00-9FD3-F921898D13EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608D309D-557B-4B00-9FD3-F921898D13EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD78B75B-27E7-41D5-8576-4828AA5D3D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD78B75B-27E7-41D5-8576-4828AA5D3D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD78B75B-27E7-41D5-8576-4828AA5D3D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD78B75B-27E7-41D5-8576-4828AA5D3D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE634BC0-886F-47DD-AEEF-D21A269E5806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE634BC0-886F-47DD-AEEF-D21A269E5806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE634BC0-886F-47DD-AEEF-D21A269E5806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE634BC0-886F-47DD-AEEF-D21A269E5806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +171,9 @@ Global
 		{E5016F77-807C-4BD4-93DB-CD0A58B085BC} = {A38D0C02-0318-4337-8113-14A5505C8BB4}
 		{B6A9CA2F-7B9C-48F1-B6A1-C5AF16A5F8A7} = {A38D0C02-0318-4337-8113-14A5505C8BB4}
 		{3376C3F1-4826-4CA9-B82D-D874E1951089} = {909F21DA-C97E-4F65-8121-D174AC2C1EF3}
+		{608D309D-557B-4B00-9FD3-F921898D13EB} = {A38D0C02-0318-4337-8113-14A5505C8BB4}
+		{BD78B75B-27E7-41D5-8576-4828AA5D3D11} = {685F7A9A-EEE5-4C39-8F4F-F88D6A78F92C}
+		{CE634BC0-886F-47DD-AEEF-D21A269E5806} = {B39CA626-3FE9-46F9-BD53-185B399C9BC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B616CB3A-8723-4ACC-B8A0-51596AB455F8}

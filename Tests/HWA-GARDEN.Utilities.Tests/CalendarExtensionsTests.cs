@@ -17,7 +17,7 @@ namespace HWA.GARDEN.Utilities.Tests
             const int Year = 2022;
 
             // Act
-            var result = value.ToDate(Year);
+            var result = value.ToDateOnly(Year);
 
             // Asserts
             result.Should().HaveMonth(expectedMonth).And.HaveDay(expectedDay);
@@ -35,7 +35,7 @@ namespace HWA.GARDEN.Utilities.Tests
             const int Year = 2024;
 
             // Act
-            var result = value.ToDate(Year);
+            var result = value.ToDateOnly(Year);
 
             // Asserts
             result.Should().HaveMonth(expectedMonth).And.HaveDay(expectedDay);

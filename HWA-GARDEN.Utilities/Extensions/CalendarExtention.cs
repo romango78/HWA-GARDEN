@@ -4,7 +4,7 @@
     {
         private const int DayOfFeb28 = 59;
 
-        public static DateOnly ToDate(this int dayOfYear, int year)
+        public static DateOnly ToDateOnly(this int dayOfYear, int year)
         {
             var result = new DateOnly(year, 1, 1).AddDays(dayOfYear - 1);
             if(DateTime.IsLeapYear(year) && dayOfYear > DayOfFeb28)
@@ -37,6 +37,11 @@
                 throw new InvalidOperationException($"The '{value}' cannot be converted to DateOnly type.");
             }
             return result;
+        }
+
+        public static DateOnly ToDateOnly(this DateTime value)
+        {
+            return new DateOnly(value.Year, value.Month, value.Day);
         }
     }
 }

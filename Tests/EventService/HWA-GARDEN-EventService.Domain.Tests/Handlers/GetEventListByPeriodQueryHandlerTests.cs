@@ -6,6 +6,7 @@ using HWA.GARDEN.EventService.Data.Entities;
 using HWA.GARDEN.EventService.Data.Repositories;
 using HWA.GARDEN.EventService.Domain.Handlers;
 using HWA.GARDEN.EventService.Domain.Requests;
+using HWA.GARDEN.Utilities.Extensions;
 using MediatR;
 using Moq;
 
@@ -68,7 +69,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
             await foreach (var item in sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
                 , CancellationToken.None))
             {
-                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
+                item.Should().Match<Event>(m => m.StartDate.ToDateOnly() <= end && m.EndDate.ToDateOnly() >= start
                     && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
                     && m.Calendar.Year == 2022);
                 count++;
@@ -145,7 +146,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
             await foreach (var item in sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
                 , CancellationToken.None))
             {
-                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
+                item.Should().Match<Event>(m => m.StartDate.ToDateOnly() <= end && m.EndDate.ToDateOnly() >= start
                     && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
                     && (m.Calendar.Year == 2022 || m.Calendar.Year == 2023));
                 count++;
@@ -221,7 +222,7 @@ namespace HWA.GARDEN.EventService.Domain.Tests.Handlers
             await foreach (var item in sut.Handle(new GetEventListByPeriodQuery { StartDate = start, EndDate = end }
                 , CancellationToken.None))
             {
-                item.Should().Match<Event>(m => m.StartDate <= end && m.EndDate >= start
+                item.Should().Match<Event>(m => m.StartDate.ToDateOnly() <= end && m.EndDate.ToDateOnly() >= start
                     && m.Group.Name.Equals("G1", StringComparison.OrdinalIgnoreCase)
                     && m.Calendar.Year == 2022);
                 count++;

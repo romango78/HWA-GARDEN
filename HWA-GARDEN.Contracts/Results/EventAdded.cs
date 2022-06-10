@@ -1,13 +1,14 @@
-﻿namespace HWA.GARDEN.Contracts
+﻿using MassTransit;
+
+namespace HWA.GARDEN.Contracts.Results
 {
-    [Serializable]
-    public class Event
+    public interface EventAdded : CorrelatedBy<Guid>
     {
         public int Id { get; set; }
 
-        public Calendar Calendar { get; set; }
+        public int CalendarId { get; set; }
 
-        public EventGroup Group { get; set; }
+        public int GroupId { get; set; }
 
         public string Name { get; set; }
 
