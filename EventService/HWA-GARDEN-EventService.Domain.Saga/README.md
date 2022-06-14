@@ -63,4 +63,4 @@ s<sub>5</sub> ::= _Trying to add a new Event record_</br>
 s<sub>6</sub> ::= _Trying to remove added Event Group record (compensation action for A<sub>4</sub>)_</br>
 s<sub>7</sub> ::= _Trying to remove added Calendar record (compensation action for A<sub>2</sub>)_</br>
 
-![Fig. 1. Create Event STD Pattern](Create Event LRT.drawio.svg)
+![Create Event STD Pattern](https://github.com/romango78/HWA-GARDEN/blob/develop/EventService/HWA-GARDEN-EventService.Domain.Saga/Create%20Event%20LRT.drawio.svg)
